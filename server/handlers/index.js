@@ -1,5 +1,6 @@
 module.exports = {
-	...require('./auth')
+	...require('./auth'),
+	...require('./poll')
 };
 
 module.exports.notFound = (req, res, next) => {
@@ -11,6 +12,6 @@ module.exports.notFound = (req, res, next) => {
 
 module.exports.errors = (err, req, res, next) => {
 	res.status(err.status || 400).json({
-		err: err.message || 'oops ca va pas || NOT FOUND'
+		message: err.message || 'unexpected error happend'
     });
 };

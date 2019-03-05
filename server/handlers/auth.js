@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const db = require('../models');
 
+////// REGISTER FONCTION FOR MONGODB
 
 exports.register = async (req, res, next) => {
     try {
@@ -19,7 +20,7 @@ exports.register = async (req, res, next) => {
     }
  };
 
-/////////////////////////////////////
+////// LOGIN FUNCTION VIA MONGODB
 
 exports.login = async (req, res, next) => {
     
