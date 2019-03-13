@@ -5,5 +5,6 @@ import error from './error';
 
 
 export default combineReducers({
-    error
+    error,
+    auth
 });
