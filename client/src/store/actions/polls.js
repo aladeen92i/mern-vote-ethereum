@@ -53,16 +53,16 @@ export const createPoll = data => {
 
 export const getCurrentPoll = path => {
     return async dispatch => {
-        try {
-            const poll = api.call('get', `polls/${path}`);
-            dispatch(setCurrentPoll(poll));
-            dispatch(removeError());
-        } catch (err) {
-            const error = err.response.data;
-            dispatch(addError(error.message));
-        }
-    }
-}
+      try {
+        const poll = await api.call('get', `polls/${path}`);
+        dispatch(setCurrentPoll(poll));
+        dispatch(removeError());
+      } catch (err) {
+        const { error } = err.response.data;
+        dispatch(addError(error));
+      }
+    };
+  };
 
 export const vote = (path, data) => {
     return async dispatch => {
