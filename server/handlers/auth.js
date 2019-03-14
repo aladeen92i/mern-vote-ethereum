@@ -23,22 +23,24 @@ exports.register = async (req, res, next) => {
 ////// LOGIN FUNCTION VIA MONGODB
 
 exports.login = async (req, res, next) => {
-    
-    try {
-        const user = await db.User.findOne({
-          "username": req.body.username,
-        });
-        const { id, username } = user;
-        const valid = await user.comparePassword(req.body.password);
+  try {
+    const user = await db.User.findOne({
+      username: req.body.username,
+    });
+    const { id, username } = user;
+    const valid = await user.comparePassword(req.body.password);
 
-        if (valid) {
-            const token = jwt.sign({id, username}, process.env.SECRET);
-            res.json({id, username, token});
-        } else {
-            throw new Error();
-       }
-    } catch (err) {
-        err.message = 'invalid username/password';
-        console.log(err);
+    if (valid) {
+      const token = jwt.sign({ id, username }, process.env.SECRET);
+      return res.status(200).json({
+        id,
+        username,
+        token,
+      });
+    } else {
+      throw new Error();
     }
- };
+  } catch (err) {
+    return next({ status: 400, message: 'Invalid Username/Password' });
+  }
+};

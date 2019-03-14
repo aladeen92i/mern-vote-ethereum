@@ -20,10 +20,11 @@ class Auth extends Component {
     }
 
     handleSubmit(e){
+        console.log(e);
         const {username, password } = this.state;
         const {authType} = this.props;
         e.preventDefault();
-        //console.log(username, password);
+        console.log(username, password);
         this.props.authUser(authType || 'login', {username, password});
     }
 
@@ -33,7 +34,7 @@ class Auth extends Component {
         return <div>
             <form onSubmit={this.handleSubmit}>
                 <label htmlFor="username" >username</label>
-                <input type="text" value={username} name="username" onChange={this.handleChange}/>
+                <input type="text" value={username} name="username" autoComplete='off' onChange={this.handleChange}/>
                 <label htmlFor="password" >password</label>
                 <input type="password" value={password} name="password" onChange={this.handleChange}/>
                 <button type="submit" >Log In bro</button>
