@@ -12,7 +12,9 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.16.4",
+    "ganache-cli": "^6.4.1",
     "jsonwebtoken": "^8.5.0",
-    "mongoose": "^5.0.15"
+    "mongoose": "^5.0.15",
+    "truffle": "^5.0.8"
   }
 }

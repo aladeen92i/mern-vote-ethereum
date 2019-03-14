@@ -76,3 +76,17 @@ export const vote = (path, data) => {
         }
     }
 }
+
+export const deletePoll = id => {
+    return async dispatch => {
+        try {
+            console.log("ID QUE TU VEUX SUPPR");
+            const poll = await api.call('delete', `polls/${id}`);
+            //dispatch(setCurrentPoll(poll));
+            dispatch(removeError());
+        } catch (err) {
+            const error = err.response.data;
+            dispatch(addError(error.message));
+        }
+    }
+}

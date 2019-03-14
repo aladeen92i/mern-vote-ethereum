@@ -16,9 +16,9 @@ const Navbar = ({ auth, logout }) => (
         {!auth.isAuthenticated && (
           <Fragment>
             <li>
-              <Link className="navbar-item" to="/register">
-                Register
-              </Link>
+                <Link className="button" to="/register">
+                  Register
+                </Link>
             </li>
             <li>
               <Link className="navbar-item" to="/login">

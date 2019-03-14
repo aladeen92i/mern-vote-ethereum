@@ -20,3 +20,9 @@
     text-align: center;
     text-transform: uppercase;
   }
+
+  .pie {
+    width: 40%;
+    align-content: center;
+
+  }
