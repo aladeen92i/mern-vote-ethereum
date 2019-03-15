@@ -15,6 +15,7 @@
     "ganache-cli": "^6.4.1",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.0.15",
-    "truffle": "^5.0.8"
+    "truffle": "^5.0.8",
+    "web3": "^1.0.0-beta.48"
   }
 }

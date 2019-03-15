@@ -6,19 +6,16 @@ import { Drizzle, generateStore } from "drizzle";
 import MyStringStore from "../contracts/MyStringStore.json";
 //import drizzleOptions from './drizzleOptions'
 
-const drizzleOptions = {
-    contracts: [MyStringStore],
-    web3: {
-      fallback: {
-        type: "ws",
-        url: "ws://127.0.0.1:9545",
-      },
-    },
+const options = {
+  contracts: [MyStringStore]
   };
+  
+  const drizzleStore = generateStore(options);
+  const drizzle = new Drizzle(options, drizzleStore);
 
 const DEFAULT_STATE = {
     error: {message: null},
-    contracts: generateContractsInitialState(drizzleOptions)
+    contracts: generateContractsInitialState(options)
 };
 
 export const store = createStore(

@@ -63,7 +63,7 @@ const UITest = props => (
       <Poll />
       <hr />
       <h2>Testing Drizzle contract Component: </h2>
-      <Contract drizzle={drizzle}/>
+      <Contract contract="MyStringStore"/>
       <hr />
     </Fragment>
   </Provider>
