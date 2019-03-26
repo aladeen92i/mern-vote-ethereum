@@ -13,7 +13,7 @@ import Poll from '../components/Poll';
 import Polls from '../components/Polls';
 import ErrorMessage from '../components/ErrorMessage';
 import CreatePoll from '../components/CreatePoll';
-import Contract from '../components/Contract';
+//import Contract from '../components/Contract';
 
 if (localStorage.jwtToken) {
   setToken(localStorage.jwtToken);
@@ -63,7 +63,6 @@ const UITest = props => (
       <Poll />
       <hr />
       <h2>Testing Drizzle contract Component: </h2>
-      <Contract contract="MyStringStore"/>
       <hr />
     </Fragment>
   </Provider>

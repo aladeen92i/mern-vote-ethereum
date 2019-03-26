@@ -15,16 +15,18 @@ exports.showPolls = async (req, res, next) => {
     }
 }
 
-////// POLL FOR A SPECIFIC USER
+////// POLL FOR A SPECIFIC USERr
 
 exports.usersPolls = async(req, res, next) => {
     try {
         const { id } = req.decoded;
+        console.log(id);
         const user = await db.User.findById(id).populate('polls');
         res.status(200).json(user.polls);
 
     } catch(err) {
         err.status = 400;
+        console.log("error users polls");
         return next({status: 400, message: err.message});
     }
 }
@@ -55,14 +57,16 @@ exports.createPoll = async (req, res, next) => {
 }
 
 exports.getPoll = async (req, res, next) => {
+
     try {
+
         const {id} = req.params;
         console.log(id);
-        const poll = await db.Poll.findById(id)
-            .populate('user', ['username', 'id']);
+        const poll = await db.Poll.findById(id).populate('user', ['username', 'id']);
         
         if(!poll) throw new Error('No poll found');
         res.status(200).json(poll);
+
     } catch (err) {
         err.status = 400;
         next(err);

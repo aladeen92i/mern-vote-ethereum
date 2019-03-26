@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const handle = require('../handlers');
 
-router.get('/contract', handle.getString);
-
+router
+  .route('/')
+  .get(handle.showString);
 
 module.exports = router;
