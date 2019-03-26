@@ -25,20 +25,20 @@ if (localStorage.jwtToken) {
   }
 }
 
-const options = {
-  contracts: [MyStringStore],
-  web3: {
-    fallback: {
-      type: "ws",
-      url: "ws://127.0.0.1:9545",
-    },
-  },
-};
+// const options = {
+//   contracts: [MyStringStore],
+//   web3: {
+//     fallback: {
+//       type: "ws",
+//       url: "ws://127.0.0.1:8545",
+//     },
+//   },
+// };
 
-const drizzle = new Drizzle(options);
+// const drizzle = new Drizzle(options);
 
 const UITest = props => (
-  <DrizzleProvider options={options}>
+  // <DrizzleProvider options={options}>
   <Provider store={store}>
     <Fragment>
       <h1>UI Test Page</h1>
@@ -66,7 +66,7 @@ const UITest = props => (
       <hr />
     </Fragment>
   </Provider>
-  </DrizzleProvider>
+  // </DrizzleProvider>
 );
 
 export default withRouter(UITest);

@@ -5,12 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const Web3 = require('web3');
-if (typeof web3 !== 'undefined') {
-    var web3 = new Web3(web3.currentProvider)
-  } else {
-    var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'))
-}
+
 
 // my own middl
 const db = require('./models');
