@@ -8253,10 +8253,16 @@
       "links": {},
       "address": "0x0Bb9797EA05fADc7562e63bb7cF329FD6FFB915A",
       "transactionHash": "0x94e4fcb9e3cd6fb96daed45089297431fd1241392c00ec8bdc3b08a6b4d05410"
+    },
+    "1553684748547": {
+      "events": {},
+      "links": {},
+      "address": "0xb2Afd68F00b1446F7e86a18613Ad6cE8573B480a",
+      "transactionHash": "0x67a507b4255f75877844ea51daca71d231bad553434c1cd5c406f4cd5310f5bd"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-26T17:35:44.804Z",
+  "updatedAt": "2019-03-27T11:08:13.599Z",
   "devdoc": {
     "methods": {
       "winningProposal()": {
