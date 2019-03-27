@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth');
 
 router
   .route('/')
-  .get(auth, handle.showString);
-  //.post(auth, deployContract);
+  .get(auth, handle.showString)
+  .post(auth, handle.deployContract);
 
 module.exports = router;
