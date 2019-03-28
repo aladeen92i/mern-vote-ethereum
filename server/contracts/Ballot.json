@@ -15,21 +15,12 @@
 	},
 	{
 		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "proposals",
+		"inputs": [],
+		"name": "chairperson",
 		"outputs": [
 			{
-				"name": "name",
-				"type": "bytes32"
-			},
-			{
-				"name": "voteCount",
-				"type": "uint256"
+				"name": "",
+				"type": "address"
 			}
 		],
 		"payable": false,
@@ -38,12 +29,21 @@
 	},
 	{
 		"constant": true,
-		"inputs": [],
-		"name": "chairperson",
-		"outputs": [
+		"inputs": [
 			{
 				"name": "",
-				"type": "address"
+				"type": "uint256"
+			}
+		],
+		"name": "options",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "bytes32"
+			},
+			{
+				"name": "voteCount",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -81,11 +81,11 @@
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "getChairperson",
+		"name": "proposalName",
 		"outputs": [
 			{
 				"name": "",
-				"type": "address"
+				"type": "string"
 			}
 		],
 		"payable": false,
@@ -154,7 +154,11 @@
 	{
 		"inputs": [
 			{
-				"name": "proposalNames",
+				"name": "propName",
+				"type": "string"
+			},
+			{
+				"name": "Options",
 				"type": "bytes32[]"
 			}
 		],
