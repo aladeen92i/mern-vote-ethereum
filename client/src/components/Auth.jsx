@@ -21,7 +21,6 @@ class Auth extends Component {
     const { authType } = this.props;
     e.preventDefault();
     this.props.authUser(authType || 'login', { username, password, ethAddress });
-    console.log("ceci est l'objet authType :",authType);
   }
 
 
@@ -73,7 +72,7 @@ class Auth extends Component {
             autoComplete="off"
             className="form-input"
           />
-          { ethLabel} {ethInput }
+          { ethLabel } { ethInput }
           <div className="buttons_center">
             <button className="button" type="submit">
               Submit

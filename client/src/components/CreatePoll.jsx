@@ -9,24 +9,25 @@ class CreatePoll extends Component {
     this.state = {
       question: '',
       options: ['', ''],
-      persons: ['',''],
+      voters: ['',''],
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.addAnswer = this.addAnswer.bind(this);
     this.handleAnswer = this.handleAnswer.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.addPerson = this.addPerson.bind(this);
+    this.handleVoter = this.handleVoter.bind(this);
+    this.addVoter = this.addVoter.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  addAnswer() {
-    this.setState({ persons: [...this.state.persons, ''] });
+  addVoter() {
+    this.setState({ voters: [...this.state.voters, ''] });
   }
-  addPerson() {
+  addAnswer() {
     this.setState({ options: [...this.state.options, ''] });
   }
 
@@ -34,6 +35,11 @@ class CreatePoll extends Component {
     const options = [...this.state.options];
     options[index] = e.target.value;
     this.setState({ options });
+  }
+  handleVoter(e, index) {
+    const voters = [...this.state.voters];
+    voters[index] = e.target.value;
+    this.setState({ voters });
   }
 
   handleSubmit(e) {
@@ -49,8 +55,19 @@ class CreatePoll extends Component {
           className="form-input"
           type="text"
           value={options}
-          
           onChange={e => this.handleAnswer(e, i)}
+        />
+      </Fragment>
+    ));
+
+    const voters = this.state.voters.map((voter, i) => (
+      <Fragment key={i+1000}>
+        <label className="form-label">voter</label>
+        <input
+          className="form-input"
+          type="text"
+          value={voters}
+          onChange={e => this.handleVoter(e, i)}
         />
       </Fragment>
     ));
@@ -67,20 +84,23 @@ class CreatePoll extends Component {
           value={this.state.question}
           onChange={this.handleChange}
         />
-        <div className="container">{options}</div>
+        <div className="container">{options}
         <div className="buttons_center">
           <button className="button" type="button" onClick={this.addAnswer}>
             Add options
           </button>
-          <label className="form-label" htmlFor="question">
-            Person you want to add in you voting pool
-        </label>
-        <button className="button" type="button" onClick={this.addPerson}>
-            Add person
+          </div>
+          <div className="container">{voters}</div>
+          <div className="buttons_center">
+          <button className="button" type="button" onClick={this.addVoter}>
+            Add Voter
           </button>
+          </div>
+          <div className="buttons_center">
           <button className="button" type="submit">
             Submit
           </button>
+          </div>
         </div>
       </form>
     );

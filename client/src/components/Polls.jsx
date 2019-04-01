@@ -47,8 +47,7 @@ class Polls extends Component {
   }
 }
 
-export default connect(
-  store => ({
+export default connect(store => ({
     auth: store.auth,
     polls: store.polls,
   }),
