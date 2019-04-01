@@ -9,6 +9,5 @@ export default combineReducers({
     error,
     auth,
     polls,
-    currentPoll,
-    ...drizzleReducers
+    currentPoll
 });

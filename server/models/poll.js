@@ -9,7 +9,9 @@ const pollSchema = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     question: String,
     options: [optionSchema],
-    voted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+    voted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    contractAddress: String,
+    chairpersonAdress: String
 });
 
 module.exports = mongoose.model('Poll', pollSchema);

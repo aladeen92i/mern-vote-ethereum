@@ -9,12 +9,14 @@ class CreatePoll extends Component {
     this.state = {
       question: '',
       options: ['', ''],
+      persons: ['',''],
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.addAnswer = this.addAnswer.bind(this);
     this.handleAnswer = this.handleAnswer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addPerson = this.addPerson.bind(this);
   }
 
   handleChange(e) {
@@ -22,6 +24,9 @@ class CreatePoll extends Component {
   }
 
   addAnswer() {
+    this.setState({ persons: [...this.state.persons, ''] });
+  }
+  addPerson() {
     this.setState({ options: [...this.state.options, ''] });
   }
 
@@ -66,6 +71,12 @@ class CreatePoll extends Component {
         <div className="buttons_center">
           <button className="button" type="button" onClick={this.addAnswer}>
             Add options
+          </button>
+          <label className="form-label" htmlFor="question">
+            Person you want to add in you voting pool
+        </label>
+        <button className="button" type="button" onClick={this.addPerson}>
+            Add person
           </button>
           <button className="button" type="submit">
             Submit
