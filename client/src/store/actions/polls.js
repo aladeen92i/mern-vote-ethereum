@@ -41,6 +41,7 @@ export const getUserPolls = () => {
 export const createPoll = data => {
     return async dispatch => {
         try {
+            console.log("wesh c ladata :", data);
             const poll = await api.call('post', 'polls', data);
             dispatch(setCurrentPoll(poll));
             dispatch(removeError());
@@ -81,11 +82,15 @@ export const deletePoll = id => {
     return async dispatch => {
         try {
             const poll = await api.call('delete', `polls/${id}`);
-            //dispatch(setCurrentPoll(poll));
+            
+            dispatch(setCurrentPoll(poll));
             dispatch(removeError());
+            dispatch(setCurrentPoll());
+            
         } catch (err) {
             const error = err.response.data;
             dispatch(addError(error.message));
         }
+
     }
 }

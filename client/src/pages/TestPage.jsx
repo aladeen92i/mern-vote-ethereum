@@ -2,9 +2,6 @@ import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import decode from 'jwt-decode';
 import { Provider } from 'react-redux';
-import { DrizzleProvider } from 'drizzle-react';
-import { Drizzle, generateStore } from "drizzle";
-import MyStringStore from "../contracts/MyStringStore.json";
 import { store } from '../store';
 import { setToken, setCurrentUser, addError } from '../store/actions';
 
@@ -38,7 +35,7 @@ if (localStorage.jwtToken) {
 // const drizzle = new Drizzle(options);
 
 const UITest = props => (
-  // <DrizzleProvider options={options}>
+
   <Provider store={store}>
     <Fragment>
       <h1>UI Test Page</h1>
@@ -66,7 +63,6 @@ const UITest = props => (
       <hr />
     </Fragment>
   </Provider>
-  // </DrizzleProvider>
 );
 
 export default withRouter(UITest);

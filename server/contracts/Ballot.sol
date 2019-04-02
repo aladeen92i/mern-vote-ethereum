@@ -1,10 +1,10 @@
 pragma solidity >=0.4.22 <0.6.0;
+pragma experimental ABIEncoderV2;
 
-/// @title Voting with delegation.
+/// Mern-Vote-Ethereum : Voting with delegation.
 contract Ballot {
-    // This declares a new complex type which will
-    // be used for variables later.
-    // It will represent a single voter.
+
+    // represent a single voter.
     struct Voter {
         uint weight; // weight is accumulated by delegation
         bool voted;  // if true, that person already voted
@@ -29,55 +29,52 @@ contract Ballot {
     Option[] public options;
 
     /// Create a new ballot to choose one of `proposalNames`.
-    constructor(string memory propName, bytes32[] memory Options) public {
+    constructor(string memory propName, bytes32[] memory Options, address[] memory Voters) public {
         chairperson = msg.sender;
         voters[chairperson].weight = 1;
-        
-
         for (uint i = 0; i < Options.length; i++) {
- 
             options.push(Option({
                 name: Options[i],
                 voteCount: 0
             }));
         }
+        for (uint i = 0; i < Voters.length; i++) {
+            voters[Voters[i]].weight = 1;
+        }
         setProposalName(propName);
     }
 
     function setProposalName(string memory name) internal {
-        require(msg.sender == chairperson);
+        require (msg.sender == chairperson);
         proposalName = name;
     }
 
-    function giveRightToVote(address voter) public {
-
-        require(
+    function giveRightToVote(address voter) internal {
+        require (
             msg.sender == chairperson,
             "Only chairperson can give right to vote."
         );
-        require(
+        require (
             !voters[voter].voted,
             "The voter already voted."
         );
-        require(voters[voter].weight == 0);
-        voters[voter].weight = 1;
+        require (voters[voter].weight == 0);
+            voters[voter].weight = 1;
     }
 
     /// Delegate your vote to the voter `to`.
     function delegate(address to) public {
         // assigns reference
         Voter storage sender = voters[msg.sender];
-        require(!sender.voted, "You already voted.");
+        require (!sender.voted, "You already voted.");
 
-        require(to != msg.sender, "Self-delegation is disallowed.");
+        require (to != msg.sender, "Self-delegation is disallowed.");
 
-        while (voters[to].delegate != address(0)) {
+        while (voters[to].delegate != address(0)) { // cannot "burn" his own vote by sending it to address(0)
             to = voters[to].delegate;
-
             // We found a loop in the delegation, not allowed.
-            require(to != msg.sender, "Found loop in delegation.");
+            require (to != msg.sender, "Found loop in delegation.");
         }
-
         // Since `sender` is a reference, this
         // modifies `voters[msg.sender].voted`
         sender.voted = true;
@@ -93,20 +90,19 @@ contract Ballot {
             delegate_.weight += sender.weight;
         }
     }
-
     /// Give your vote (including votes delegated to you)
     /// to proposal `options[proposal].name`.
-    function vote(uint proposal) public {
+    function vote(uint optionIndex) public {
         Voter storage sender = voters[msg.sender];
         require(sender.weight != 0, "Has no right to vote");
         require(!sender.voted, "Already voted.");
         sender.voted = true;
-        sender.vote = proposal;
+        sender.vote = optionIndex;
 
         // If `proposal` is out of the range of the array,
         // this will throw automatically and revert all
         // changes.
-        options[proposal].voteCount += sender.weight;
+        options[optionIndex].voteCount += sender.weight;
     }
 
     /// @dev Computes the winning proposal taking all

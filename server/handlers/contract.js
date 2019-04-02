@@ -2,6 +2,8 @@ const db = require('../models');
 const auth = require('../middlewares/auth');
 const Web3 = require('web3');
 const interfaceAbi = require('../contracts/Ballot.json');
+const bytecode = require('../contracts/bytecode');
+
 
 // API EN CONSTRUCTION - DON'T BE SCARED
 
@@ -24,16 +26,23 @@ exports.showString = async (req, res, next) => {
 
         let myContract = await new web3.eth.Contract(interfaceAbi); // getting abi
         // The contract address will come from the request from client, hardcoded for now :)
-        myContract.options.address = '0xe3dd554b6dEc6dE7f29209A0fcA3a10e193163d9';
+        myContract.options.address = '0x5C4163e48A1EAbBa27DF4e3Ef7f7459861B95a87';
 
 
         if(myContract) {
 
            setTimeout(async () => {
+                let voterz = await web3.eth.getAccounts();
+                for(let i = 0; i < voterz.length; i++){
+                    if(web3.utils.isAddress(voterz[i])){
+                        console.log("ceci est bien une adresse ethereum :", voterz[i]);
+                        const voter = await myContract.methods.voters(voterz[i]).call();
+                        console.log(`call du poids d'un ${voterz[i]} sur le contrat déployé`, voter.weight);
+                    }else{
+                        console.log("invalid eth address");
+                    }
+                }
                 // passing !!! dont forget to update contract address above
-                const prop1 = await myContract.methods.options(0).call();
-                console.log("call de proposal numba 1");
-                console.log(web3.utils.hexToAscii(prop1.name));
             }, 5000);
 
             setTimeout(async () => {

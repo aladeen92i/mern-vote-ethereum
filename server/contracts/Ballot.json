@@ -3,7 +3,7 @@
 		"constant": false,
 		"inputs": [
 			{
-				"name": "proposal",
+				"name": "optionIndex",
 				"type": "uint256"
 			}
 		],
@@ -93,20 +93,6 @@
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "voter",
-				"type": "address"
-			}
-		],
-		"name": "giveRightToVote",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -160,6 +146,10 @@
 			{
 				"name": "Options",
 				"type": "bytes32[]"
+			},
+			{
+				"name": "Voters",
+				"type": "address[]"
 			}
 		],
 		"payable": false,

@@ -31,7 +31,7 @@ class Auth extends Component {
     let ethInput;
     let ethLabel;
 
-    if (authType == 'register') {
+    if (authType === 'register') {
       ethInput = <input
       type="text"
       value={ethAddress}

@@ -44,6 +44,7 @@ class CreatePoll extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    //console.log(this.state);
     this.props.createPoll(this.state);
   }
 
@@ -61,7 +62,7 @@ class CreatePoll extends Component {
     ));
 
     const voters = this.state.voters.map((voter, i) => (
-      <Fragment key={i+1000}>
+      <Fragment key={i}>
         <label className="form-label">voter</label>
         <input
           className="form-input"

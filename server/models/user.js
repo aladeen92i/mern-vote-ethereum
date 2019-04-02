@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     created: {type: Date, default: Date.now},
     polls: [{type: mongoose.Schema.Types.ObjectId, ref: 'Poll'}],
-    ethAddress: String
+    ethAddress: String,
+    participateIn: [{type: mongoose.Schema.Types.ObjectId, ref: 'Poll'}]
 });
 
 userSchema.pre('save', async function(next) {

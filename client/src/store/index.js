@@ -1,21 +1,9 @@
 import {createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './reducers'
-import { generateContractsInitialState } from 'drizzle'
-import { Drizzle, generateStore } from "drizzle";
-import MyStringStore from "../contracts/MyStringStore.json";
-//import drizzleOptions from './drizzleOptions'
-
-const options = {
-  contracts: [MyStringStore]
-  };
-  
-  const drizzleStore = generateStore(options);
-  const drizzle = new Drizzle(options, drizzleStore);
+import rootReducer from './reducers';
 
 const DEFAULT_STATE = {
-    error: {message: null},
-    contracts: generateContractsInitialState(options)
+    error: {message: null}
 };
 
 export const store = createStore(

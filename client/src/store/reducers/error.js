@@ -5,7 +5,7 @@ export default (state = {message: null}, action) => {
     switch(action.type) {
         
         case ADD_ERROR:
-            console.log(action.error);
+            //console.log(action.error);
             return {...state, message: action.error};
 
         case REMOVE_ERROR:
