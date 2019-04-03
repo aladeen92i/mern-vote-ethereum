@@ -84,8 +84,9 @@ export const deletePoll = id => {
             const poll = await api.call('delete', `polls/${id}`);
             
             dispatch(setCurrentPoll(poll));
+            const polls = await api.call('get', 'polls');
+            dispatch(setPolls(polls));
             dispatch(removeError());
-            dispatch(setCurrentPoll());
             
         } catch (err) {
             const error = err.response.data;

@@ -1,5 +1,5 @@
 pragma solidity >=0.4.22 <0.6.0;
-pragma experimental ABIEncoderV2;
+//pragma experimental ABIEncoderV2;
 
 /// Mern-Vote-Ethereum : Voting with delegation.
 contract Ballot {
@@ -17,8 +17,9 @@ contract Ballot {
         bytes32 name;   // short name (up to 32 bytes)
         uint voteCount; // number of accumulated votes
     }
-
+    uint voterCount;
     address public chairperson;
+    address a;
     string public proposalName;
     
     // This declares a state variable that
@@ -39,7 +40,8 @@ contract Ballot {
             }));
         }
         for (uint i = 0; i < Voters.length; i++) {
-            voters[Voters[i]].weight = 1;
+            giveRightToVote(Voters[i]);
+            voterCount++;
         }
         setProposalName(propName);
     }

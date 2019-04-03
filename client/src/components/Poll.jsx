@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Pie } from 'react-chartjs-2';
-
 import { vote, deletePoll } from '../store/actions';
 import { color } from '../services/color';
 
@@ -31,16 +30,16 @@ const Poll = ({ poll, vote, deletePoll }) => {
     ],
   };
 
+  
+
   return (
     <div>
-      
       <div className="pie">
       <h3 className="poll-title">{poll.question}</h3>
       <div className="buttons_center">{answers}</div>
-      
         { poll.options && <Pie data={data} /> }
       </div>
-      <button className="button" onClick={() => deletePoll(poll._id)} >Delete poll</button>
+      <button className="button" onClick={() => deletePoll(poll._id)}>Delete poll</button>
     </div>
   );
 };

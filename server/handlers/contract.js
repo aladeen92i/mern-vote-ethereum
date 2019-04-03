@@ -26,7 +26,7 @@ exports.showString = async (req, res, next) => {
 
         let myContract = await new web3.eth.Contract(interfaceAbi); // getting abi
         // The contract address will come from the request from client, hardcoded for now :)
-        myContract.options.address = '0x5C4163e48A1EAbBa27DF4e3Ef7f7459861B95a87';
+        myContract.options.address = '0xB9d9754B8717BB7ccCa1DBF7738285b6Dc44a410';
 
 
         if(myContract) {
@@ -34,10 +34,10 @@ exports.showString = async (req, res, next) => {
            setTimeout(async () => {
                 let voterz = await web3.eth.getAccounts();
                 for(let i = 0; i < voterz.length; i++){
+                    const voter = await myContract.methods.voters(voterz[i]).call();
                     if(web3.utils.isAddress(voterz[i])){
                         console.log("ceci est bien une adresse ethereum :", voterz[i]);
-                        const voter = await myContract.methods.voters(voterz[i]).call();
-                        console.log(`call du poids d'un ${voterz[i]} sur le contrat déployé`, voter.weight);
+                        console.log(`call du poids d'un voter sur le contrat déployé`, voter.weight);
                     }else{
                         console.log("invalid eth address");
                     }
