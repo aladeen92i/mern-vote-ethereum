@@ -1,5 +1,7 @@
 require('dotenv').config();
-
+const path = require('path');
+const compression = require('compression');
+const helmet = require('helmet');
 
 // middlewares
 const express = require('express');
@@ -15,8 +17,11 @@ const routes = require('./routes/');
 const app = express();
 const port = process.env.PORT;
 
+app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json())
+app.use(compression()); //Compress all routes
+app.use(express.static(path.join(__dirname, 'build')))
 
 app.use('/api/auth', routes.auth);
 app.use('/api/polls', routes.poll);
