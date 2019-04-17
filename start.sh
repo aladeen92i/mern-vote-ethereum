@@ -1,2 +1,2 @@
-cd server && npm start && ./ganache.sh &
-cd client && npm start
+cd server && npm start &
+cd client && npm run build && npm run start
