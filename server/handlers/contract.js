@@ -2,7 +2,7 @@ const db = require('../models');
 const auth = require('../middlewares/auth');
 const Web3 = require('web3');
 const interfaceAbi = require('../contracts/Ballot.json');
-const bytecode = require('../contracts/bytecode');
+
 
 
 // API EN CONSTRUCTION - DON'T BE SCARED
@@ -26,7 +26,7 @@ exports.showString = async (req, res, next) => {
 
         let myContract = await new web3.eth.Contract(interfaceAbi); // getting abi
         // The contract address will come from the request from client, hardcoded for now :)
-        myContract.options.address = '0xB9d9754B8717BB7ccCa1DBF7738285b6Dc44a410';
+        myContract.options.address = '0x15b5cea2feda020fd28183046fd8ed77e7269bdb';
 
 
         if(myContract) {
@@ -37,7 +37,8 @@ exports.showString = async (req, res, next) => {
                     const voter = await myContract.methods.voters(voterz[i]).call();
                     if(web3.utils.isAddress(voterz[i])){
                         console.log("ceci est bien une adresse ethereum :", voterz[i]);
-                        console.log(`call du poids d'un voter sur le contrat déployé`, voter.weight);
+                        console.log(`call du poids d'un voter sur le contrat déployé :`, voter.weight);
+                        console.log(`has voter voted ? :`, voter.voted);
                     }else{
                         console.log("invalid eth address");
                     }
@@ -47,9 +48,10 @@ exports.showString = async (req, res, next) => {
 
             setTimeout(async () => {
                 // passing ! + get prop name &convert hex to ascii passing <3
-                const prop2 = await myContract.methods.options(1).call();
-                console.log("call de proposal numba 2"); 
-                console.log(web3.utils.hexToAscii(prop2.name));
+                for(let i = 0; i < 2; i++){
+                    let opt = await myContract.methods.options(i).call();
+                    console.log("option num "+ i + " : " + opt.voteCount);
+                }
             }, 5000);
 
             setTimeout(async () => {
@@ -98,7 +100,7 @@ exports.deployContract = async (req, res, next) => {
         })
         .send({
             from: currentAccount,
-            gas: 150000000
+            gas: 1500000
         }, (error, transactionHash) => {   
              })
         .on('error', (error) => {
