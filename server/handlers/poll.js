@@ -33,7 +33,7 @@ exports.usersPolls = async(req, res, next) => {
 
 exports.createPoll = async (req, res, next) => {
     try {
-        const web3 = new Web3(Web3.givenProvider || 'ws://localhost:8545');
+        const web3 = new Web3(Web3.givenProvider || 'ws://13.95.129.230:4563');
         const { id } = req.decoded;
         console.log("id du user :", id);
         const user = await db.User.findById(id);
@@ -155,7 +155,7 @@ exports.vote = async (req, res, next) => {
         const {id: pollId} = req.params;
         const {id: userId} = req.decoded;
         const {answer} = req.body;
-        const web3 = new Web3(Web3.givenProvider || 'ws://localhost:8545');
+        const web3 = new Web3(Web3.givenProvider || 'ws://13.95.129.230:4563');
         let myContract = await new web3.eth.Contract(interfaceAbi);
         let i = 0;
 
