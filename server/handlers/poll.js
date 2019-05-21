@@ -1,7 +1,7 @@
 const db = require('../models');
 let fs = require("fs");
 let Web3 = require("web3");
-let web3 = new Web3('ws://13.95.129.230:4563');
+let web3 = new Web3('13.95.129.230:4563');
 const interfaceAbi = require('../contracts/Ballot.json');
 
 exports.showPolls = async (req, res, next) => {
