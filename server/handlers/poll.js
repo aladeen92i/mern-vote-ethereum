@@ -161,7 +161,9 @@ exports.vote = async (req, res, next) => {
 
         if(answer) {
             const poll = await db.Poll.findById(pollId);
-            var myContractInstance = MyContract.at(poll.contractAddress);
+            console.log(poll.contractAddress);
+            var myContractInstance = myContract.at(poll.contractAddress);
+	    console.log(myContractInstance);
             if(!poll) throw new Error('No poll found'); 
             const vote = poll.options.map(          // récupération de l'option choisie
                 option => {
@@ -183,7 +185,7 @@ exports.vote = async (req, res, next) => {
                             if(poll.options[i].option == answer){
                                 // console.log(poll.options[i].option + " // " + answer);
                                 console.log("option trouvée, lancement du vote ");
-                                await myContract.myContractInstance.vote(i, {from: user.ethAddress, value: 200, gas: 2000}, function(err, result){ 
+                                myContract.myContractInstance.vote(i, {from: user.ethAddress, value: 200, gas: 20000}, function(err, result){ 
                                     if(!err){
                                         console.log(result);
                                     }else{
