@@ -1,7 +1,9 @@
 const router = require('express').Router();
+const cors = require('cors');
 const handle = require('../handlers');
 const auth = require('../middlewares/auth');
 
+//router.options('/', cors())
 router
   .route('/')
   .get(handle.showPolls)

@@ -59,7 +59,7 @@ export const getCurrentPoll = path => {
         dispatch(setCurrentPoll(poll));
         dispatch(removeError());
       } catch (err) {
-        const { error } = err.response.data;
+        const  error  = err.response.data;
         dispatch(addError(error));
       }
     };
