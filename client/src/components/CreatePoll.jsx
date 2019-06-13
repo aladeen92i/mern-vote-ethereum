@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { createPoll } from '../store/actions';
@@ -45,11 +46,13 @@ class CreatePoll extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.createPoll(this.state);
+    this.props.history.push('/');
   }
 
   render() {
     const options = this.state.options.map((option, i) => (
       <Fragment key={i}>
+        
         <label className="form-label">option</label>
         <input
           className="form-input"
@@ -57,6 +60,7 @@ class CreatePoll extends Component {
           value={options}
           onChange={e => this.handleAnswer(e, i)}
         />
+        
       </Fragment>
     ));
 
@@ -73,6 +77,7 @@ class CreatePoll extends Component {
     ));
 
     return (
+      <div className="nav-wrapper purple darken-1">
       <form className="form" onSubmit={this.handleSubmit}>
         <label className="form-label" htmlFor="question">
           question
@@ -103,8 +108,9 @@ class CreatePoll extends Component {
           </div>
         </div>
       </form>
+      </div>
     );
   }
 }
 
-export default connect(() => ({}), { createPoll })(CreatePoll);
+export default withRouter(connect(() => ({}), { createPoll })(CreatePoll));

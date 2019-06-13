@@ -1,6 +1,7 @@
 import {SET_POLLS, SET_CURRENT_POLL} from '../actionTypes';
 import {addError, removeError} from './error';
 import api from '../../services/api';
+//import { BrowserHistory } from 'react-router';
 
 export const setPolls = polls => ({
     type: SET_POLLS,
@@ -62,7 +63,7 @@ export const getCurrentPoll = path => {
         const  error  = err.response.data;
         dispatch(addError(error));
       }
-    };
+    }
   };
 
 export const vote = (path, data) => {
@@ -78,14 +79,11 @@ export const vote = (path, data) => {
     }
 }
 
-export const deletePoll = id => {
+export const deletePoll = (id) => {
     return async dispatch => {
         try {
             const poll = await api.call('delete', `polls/${id}`);
-            
             dispatch(setCurrentPoll(poll));
-            const polls = await api.call('get', 'polls');
-            dispatch(setPolls(polls));
             dispatch(removeError());
             
         } catch (err) {

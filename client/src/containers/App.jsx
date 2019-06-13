@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {Provider} from 'react-redux';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import decode from 'jwt-decode';
 
 
@@ -34,12 +34,12 @@ if(localStorage.jwtToken) {
 const App = () => (
     
     <Provider store={store}>
-        <Router>
+        <BrowserRouter>
             <Fragment>
                 <NavBar/>
                 <RouteViews/>
             </Fragment>
-     </Router>
+     </BrowserRouter>
     </Provider>
 );
 

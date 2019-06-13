@@ -33,50 +33,50 @@ class Auth extends Component {
 
     if (authType === 'register') {
       ethInput = <input
-      type="text"
-      value={ethAddress}
-      name="ethAddress"
-      onChange={this.handleChange}
-      autoComplete="off"
-      className="form-input"
-      />;
+                    type="text"
+                    value={ethAddress}
+                    name="ethAddress"
+                    onChange={this.handleChange}
+                    autoComplete="off"
+                    className="form-input validate"
+                  />;
       ethLabel= <label className="form-label" htmlFor="ethAddress">
-                    ethAddress (optional for login) {' '}
+                    ethAddress {' '}
               </label>;
     } else {
       ethInput = null ;
     }
     return (
-      <div>
-        <h1 className="poll-title">{authType}</h1>
-        <form className="form" onSubmit={this.handleSubmit}>
-          <label className="form-label" htmlFor="username">
-            username{' '}
-          </label>
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={this.handleChange}
-            autoComplete="off"
-            className="form-input"
-          />
-          <label className="form-label" htmlFor="password">
-            password{' '}
-          </label>
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={this.handleChange}
-            autoComplete="off"
-            className="form-input"
-          />
-          { ethLabel } { ethInput }
-          <div className="buttons_center">
-            <button className="button" type="submit">
-              Submit
-            </button>
+      <div className="row">
+        <form className="col s12" onSubmit={this.handleSubmit}>
+          <div className="container">
+            <div className="card blue-grey darken-1">
+              <div className="card-content">
+              <h1 className="card-title">{authType}</h1>
+                <div className="row">
+                  <div className="input-field col s12">
+                    <input id="email" type="email" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="validate"/>
+                    <label for="email">Email</label>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="input-field col s12">
+                    <input id="password" type="password" value={password} name="password" onChange={this.handleChange} className="validate"/>
+                    <label for="password">Password</label>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="input-field col s12">
+                  { ethLabel } { ethInput }
+                  </div>
+                </div>
+                <div className="buttons_center">
+                    <button className="btn" type="submit">
+                      Submit
+                    </button>
+                  </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>

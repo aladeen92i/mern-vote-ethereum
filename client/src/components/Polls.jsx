@@ -12,6 +12,16 @@ class Polls extends Component {
     const { getPolls } = this.props;
     getPolls();
   }
+  componentWillUpdate() {
+    const { getPolls } = this.props;
+    setTimeout(
+      function() {
+          getPolls();
+      }
+      .bind(this),
+      3000
+    );
+  }
 
   handleSelect(id) {
     const { history } = this.props;
@@ -22,25 +32,31 @@ class Polls extends Component {
     const { getPolls, getUserPolls, auth } = this.props;
 
     const polls = this.props.polls.map(poll => (
-      <li onClick={() => this.handleSelect(poll._id)} key={poll._id}>
-        {poll.question}
-      </li>
+      <div class="collection-item">
+            <li onClick={() => this.handleSelect(poll._id)} key={poll._id} className>
+              {poll.question}
+            </li>
+          </div>
     ));
+
 
     return (
       <Fragment>
         {auth.isAuthenticated && (
-          <div className="buttons_center">
-            <button className="button" onClick={getPolls}>
-              All polls
-            </button>
-            <button className="button" onClick={getUserPolls}>
-              My polls
-            </button>
+          <div className="row">
+            <div className="center">
+              <button className="button center" onClick={getPolls}>
+                All polls
+              </button>
+              <button className="button center" onClick={getUserPolls}>
+                My polls
+              </button>
+            </div>
           </div>
         )}
-        <div className="form">
-            <ul className="polls">{polls}</ul>
+        <div className="container">
+            <ul className="collection with-header">{polls}</ul>
+              <li className="collection-header"><h4>Here are the questions :</h4></li>
         </div>
       </Fragment>
     );
