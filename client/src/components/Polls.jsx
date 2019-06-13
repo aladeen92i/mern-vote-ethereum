@@ -39,7 +39,6 @@ class Polls extends Component {
           </div>
     ));
 
-
     return (
       <Fragment>
         {auth.isAuthenticated && (
@@ -54,7 +53,7 @@ class Polls extends Component {
             </div>
           </div>
         )}
-        <div className="container">
+        <div className="container"> 
             <ul className="collection with-header">{polls}</ul>
               <li className="collection-header"><h4>Here are the questions :</h4></li>
         </div>

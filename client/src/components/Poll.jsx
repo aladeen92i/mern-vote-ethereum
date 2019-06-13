@@ -27,33 +27,39 @@ const Poll = ({ poll, vote, deletePoll }) => {
         backgroundColor: poll.options.map(option => color()),
         borderColor: '#323643',
         data: poll.options.map(option => option.votes),
-      },
-    ],
-  };
-
-  const contractData = poll.options && {
-    labels: poll.options.map(option => option.option),
-    datasets: [
-      {
-        label: poll.question,
-        backgroundColor: poll.options.map(option => color()),
-        borderColor: '#323643',
-        data: poll.options.map(option => option.votes),
+        defaultFontColor: "#FFFFFF",
       },
     ],
   };
 
   return (
-    <div>
-      <div className="pie">
-      <h3 className="poll-title">{poll.question}</h3>
-      <h2>Infos from the smart contract</h2>
-      <div className="buttons_center">{answers}</div>
-        { poll.options && <Pie data={mongoData} /> }
-      </div>
-      <button className="btn waves-effect waves-light" onClick={() => deletePoll(poll._id)}>Delete poll</button>
-      <div className="pie">
-      { poll.options && <Pie data={contractData} /> }
+    <div className="row">
+      <div className="container">
+        <div className="col s6 m6">
+          <div className="card blue-grey darken-1">
+            <div className="card-content white-text">
+              <span className="card-title">{poll.question}</span>
+              <p>Infos from the smart contract</p>
+            </div>
+          <div className="card-action">
+            <ul>
+              <li>{answers}</li>
+              <li><button className="button" onClick={() => deletePoll(poll._id)}>Delete poll</button></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+          <div className="container">
+            <div className="col s6 m6">
+              <div className="card blue-grey lighten-2">
+                <div className="card-content">
+                <span className="card-title">Votes</span>
+                <p>Nice graphic of the votes</p>
+                  { poll.options && <Pie data={mongoData} /> }
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   );
