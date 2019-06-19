@@ -26,6 +26,21 @@ export const getPolls = () => {
     }
 }
 
+export const getSlicedPolls = () => {
+    return async dispatch => {
+        try {
+            const polls = await api.call('get', 'polls');
+            console.log("ceci est la taille de polls : " + polls.length);
+            const slicedPolls = polls.slice((polls.length - 5),polls.length);
+            dispatch(setPolls(slicedPolls));
+            dispatch(removeError());
+        } catch (err) {
+            const error = err.response.data;
+            dispatch(addError(error.message));
+        }
+    }
+}
+
 export const getUserPolls = () => {
     return async dispatch => {
         try {
@@ -42,7 +57,6 @@ export const getUserPolls = () => {
 export const createPoll = data => {
     return async dispatch => {
         try {
-            console.log("wesh c ladata :", data);
             const poll = await api.call('post', 'polls', data);
             dispatch(setCurrentPoll(poll));
             dispatch(removeError());
@@ -90,6 +104,5 @@ export const deletePoll = (id) => {
             const error = err.response.data;
             dispatch(addError(error.message));
         }
-
     }
 }

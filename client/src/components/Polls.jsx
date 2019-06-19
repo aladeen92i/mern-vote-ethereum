@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-
-import { getPolls, getUserPolls } from '../store/actions';
+import { Link } from 'react-router-dom';
+import { getPolls, getUserPolls, getSlicedPolls } from '../store/actions';
 
 class Polls extends Component {
   constructor(props) {
@@ -9,54 +9,104 @@ class Polls extends Component {
     this.handleSelect = this.handleSelect.bind(this);
   }
   componentDidMount() {
-    const { getPolls } = this.props;
-    getPolls();
+    const { getSlicedPolls } = this.props;
+    getSlicedPolls();
   }
-  componentWillUpdate() {
-    const { getPolls } = this.props;
-    setTimeout(
-      function() {
-          getPolls();
-      }
-      .bind(this),
-      3000
-    );
-  }
+
+  // componentWillMount() {
+  //   const { getSlicedPolls } = this.props;
+  //   getSlicedPolls();
+  //}
+  // componentWillUpdate() {
+  //   const { getSlicedPolls } = this.props;
+  //   setTimeout(
+  //     function() {
+  //         getSlicedPolls();
+  //     },
+  //     2000
+  //   );
+  // }
 
   handleSelect(id) {
     const { history } = this.props;
     history.push(`/polls/${id}`);
   }
 
-  render() {
-    const { getPolls, getUserPolls, auth } = this.props;
+  render() {  
+    const { getPolls, getUserPolls, auth, getSlicedPolls } = this.props;
+    // card style for displaying polls, switching to collection for homepage
+    // const cardsPolls = this.props.polls.map(poll => (
+    //   <Fragment key={poll._id}>
+    //   <div className="section">
+    //   <div className="row">
+    //     <div className="col s12 offset-s1">
+    //       <div className="card grey lighten-1">
+    //         <div className="card-content">
+    //           <span className="card-title">{poll.question}</span>
+    //           <a><li className="card-content" onClick={() => this.handleSelect(poll._id)} >Click on me to start voting !</li></a>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   </div>
+    //   </Fragment>
+    // ));
 
-    const polls = this.props.polls.map(poll => (
-      <div class="collection-item">
-            <li onClick={() => this.handleSelect(poll._id)} key={poll._id} className>
-              {poll.question}
-            </li>
-          </div>
+    const polls = this.props.polls.map((poll, i=0) => (
+      <Fragment key={poll._id}>
+        <tr className="">
+          <td>{poll.question}</td>
+          <td> voters list inc soon </td>
+          <td> Poll status inc soon </td>
+          <td> Voted inc soon </td>
+          <td> Participation inc soon </td>
+          <td><button className="btn-small buttons_center z-depth-1" onClick={() => this.handleSelect(poll._id)} ><i className="material-icons">send</i></button></td>
+        </tr>
+      </Fragment>
     ));
 
     return (
       <Fragment>
         {auth.isAuthenticated && (
-          <div className="row">
-            <div className="center">
-              <button className="button center" onClick={getPolls}>
+            <div className="row">
+            <div className="section"></div>
+              <button className="btn-small buttons_center col s1 m1 l1 offset-s2 offset-m2 offset-l2 z-depth-3" onClick={getPolls}>
                 All polls
               </button>
-              <button className="button center" onClick={getUserPolls}>
+              <button className="btn-small buttons_center col s1 m1 l1 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getUserPolls}>
                 My polls
               </button>
+              <button className="btn-small buttons_center col s1 m1 l1 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getSlicedPolls}>
+                Last Polls
+              </button>
+              
+              <Link className="btn-large buttons_center col s1 m1 l1 offset-s1 offset-m1 offset-l1 z-depth-3" to="/poll/new">New</Link>
             </div>
-          </div>
         )}
-        <div className="container"> 
-            <ul className="collection with-header">{polls}</ul>
-              <li className="collection-header"><h4>Here are the questions :</h4></li>
-        </div>
+        <br></br>
+              {auth.isAuthenticated && (
+                <div className="container z-depth-4">
+                            <table className="responsive-table centered z-depth-1">
+                              <thead>
+                                <tr>
+                                  <th> Name </th>
+                                  <th> Voters List </th>
+                                  <th> Poll Status </th>
+                                  <th> voted ? </th>
+                                  <th> Participation </th>
+                                </tr>
+                              </thead>
+                              <tbody>{polls}</tbody>
+                              
+                            </table>
+                </div>
+              )}
+        {!auth.isAuthenticated && (
+            <div className="container">
+                <h4>You're not connected please register or login to use this app </h4>
+                <p>TODO : homepage for not connected or new users </p>
+            </div>
+        )}
       </Fragment>
     );
   }
@@ -66,5 +116,5 @@ export default connect(store => ({
     auth: store.auth,
     polls: store.polls,
   }),
-  { getPolls, getUserPolls },
+  { getPolls, getUserPolls, getSlicedPolls },
 )(Polls);

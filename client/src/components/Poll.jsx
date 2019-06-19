@@ -19,7 +19,7 @@ const Poll = ({ poll, vote, deletePoll }) => {
       </button>
     ));
 
-  const mongoData = poll.options && {
+  const pollData = poll.options && {
     labels: poll.options.map(option => option.option),
     datasets: [
       {
@@ -30,6 +30,12 @@ const Poll = ({ poll, vote, deletePoll }) => {
         defaultFontColor: "#FFFFFF",
       },
     ],
+  };
+
+  const pollDataBis = async () => {
+    // TODO : appel sur l'api pour récupérer les infos du contrat 
+    // au lieu de stocker dans mongo quand l'appel au noeud eth s'est bien passé..
+    // puis les display comme prévu
   };
 
   return (
@@ -55,7 +61,7 @@ const Poll = ({ poll, vote, deletePoll }) => {
                 <div className="card-content">
                 <span className="card-title">Votes</span>
                 <p>Nice graphic of the votes</p>
-                  { poll.options && <Pie data={mongoData} /> }
+                  { poll.options && <Pie data={pollData} /> }
                 </div>
               </div>
             </div>

@@ -45,16 +45,16 @@ exports.createPoll = async (req, res, next) => {
             }
         }
         const { id } = req.decoded;
-        console.log("id du user :", id);
+        // console.log("id du user :", id);
         const user = await db.User.findById(id);
         const { question, options, voters } = req.body;
-        console.log("debut du déploiement de contrat + poll sur mongo db, args :", question, options, voters);
+        // console.log("debut du déploiement de contrat + poll sur mongo db, args :", question, options, voters);
         let listOpt = options.map(option => ({ option, votes: 0 }));
 	    console.log(listOpt);
         let optTab = [];
         for(let i = 0; i < listOpt.length; i++){
             optTab[i] = web3.fromAscii(listOpt[i].option);
-            console.log(`opt tab de ${i}  : ` + web3.padRight(optTab[i], 20, '0'));
+            //console.log(`opt tab de ${i}  : ` + web3.padRight(optTab[i], 20, '0'));
         }
 
         let currentAccount = user.ethAddress;
@@ -62,7 +62,7 @@ exports.createPoll = async (req, res, next) => {
         let balance = web3.eth.getBalance(currentAccount)
         console.log("Balance : " + balance);
 
-        if (await web3.personal.unlockAccount(currentAccount, "Azemlk123", 1000) ) {
+        if (web3.personal.unlockAccount(currentAccount, "Azemlk123", 1000) ) {
             console.log(`${currentAccount} is unlocked`);
         }else{
             console.log(`unlock failed, ${currentAccount}`);
@@ -79,7 +79,7 @@ exports.createPoll = async (req, res, next) => {
         let MyContract = web3.eth.contract(interfaceAbi);
         let gasEstimate = web3.eth.estimateGas({data: byteCode});
         console.log("Estimation du gaz : " + gasEstimate);
-        
+        // TODO : Faire en sorte que les votants soient entré en tant qu'email et que moi je translate en ethAddr pour le contrat
             let myContractReturned = await MyContract.new(req.body.question, optTab, voters, {
                 from: currentAccount,
                 data: byteCode,
@@ -124,7 +124,6 @@ exports.getPoll = async (req, res, next) => {
         const {id} = req.params;
         console.log(id);
         const poll = await db.Poll.findById(id).populate('user', ['username', 'id']);
-        //console.log(poll);
         if(!poll) throw new Error('No poll found');
         res.status(200).json(poll);
     } catch (err) {
@@ -171,13 +170,11 @@ exports.vote = async (req, res, next) => {
         }
 
         let i = 0;
-        console.log(" non mais allo la réponse " + answer);
         if(answer) {
             const poll = await db.Poll.findById(pollId);
             let votingContracObj = web3.eth.contract(interfaceAbi);
             let myContractInstance= votingContracObj.at(poll.contractAddress);
-            console.log("Non mais allo le contract: " + myContractInstance);
-            console.log("Adresse du contrat : " + poll);
+            console.log("Poll info : " + poll);
             if(!myContractInstance) throw new Error('No instance of contract');
             if(!poll) throw new Error('No poll found'); 
             const vote = poll.options.map(          // récupération de l'option choisie
@@ -200,9 +197,9 @@ exports.vote = async (req, res, next) => {
                             if(poll.options[i].option == answer){
                                 // console.log(poll.options[i].option + " // " + answer);
                                 console.log("option trouvée, lancement du vote ");
-                                myContractInstance.vote(i, {from: user.ethAddress, gas: 309911}, async function(err, result){ 
+                                myContractInstance.vote(i, {from: user.ethAddress, gas: 8000000}, async function(err, result){ 
                                     if(!err){
-                                        console.log(result);
+                                        console.log("result (obviously a tx hash)" + result);
                                     }else{
                                         throw new Error('Voting function didnt work ?!');
                                     }

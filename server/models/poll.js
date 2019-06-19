@@ -5,6 +5,11 @@ const optionSchema = new mongoose.Schema({
     votes: {type: Number, default: 0}
 });
 
+const listSchema = new mongoose.Schema({
+    mail: String,
+    voted: {type: Number, default: 0}
+});
+
 const pollSchema = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     question: String,
@@ -14,7 +19,10 @@ const pollSchema = new mongoose.Schema({
     }],
     voted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     contractAddress: String,
-    chairpersonAdress: String
+    chairpersonAdress: String,
+    status: String,
+
+
 });
 
 module.exports = mongoose.model('Poll', pollSchema);

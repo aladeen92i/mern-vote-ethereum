@@ -1,9 +1,9 @@
 .form {
     width: 60%;
     margin: auto;
-    background-color: var(--light);
-    padding: 1rem;
-    border-radius: 0.1rem;
+    padding: 20px;
+    border-radius: 25px;
+    
   }
   
   .form-input {
