@@ -9,6 +9,7 @@ class Auth extends Component {
     this.state = {
       username: '',
       password: '',
+      email: '',
       ethAddress: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -18,10 +19,10 @@ class Auth extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   handleSubmit(e) {
-    const { username, password, ethAddress } = this.state;
+    const { username, password, ethAddress, email } = this.state;
     const { authType } = this.props;
     e.preventDefault();
-    this.props.authUser(authType || 'login', { username, password, ethAddress });
+    this.props.authUser(authType || 'login', { username, password, ethAddress, email });
   }
 
   componentDidMount(){
@@ -30,11 +31,12 @@ class Auth extends Component {
 
 
   render() {
-    const { username, password, ethAddress } = this.state;
+    const { username, password, email, ethAddress } = this.state;
     const { authType } = this.props;
     let ethInput;
     let ethLabel;
     let cardActions;
+    let emailInput, emailLabel;
 
     if (authType === 'register') {
       ethInput = <input
@@ -47,7 +49,18 @@ class Auth extends Component {
                   />;
       ethLabel= <label className="form-label" htmlFor="ethAddress">
                     ethAddress {' '}
-              </label>;
+                </label>;
+      emailInput = <input
+                    type="text"
+                    value={email}
+                    name="email"
+                    onChange={this.handleChange}
+                    autoComplete="off"
+                    className="form-input validate"
+                  />;
+      emailLabel= <label className="form-label" htmlFor="email">
+                      email {' '}
+                  </label>;
       cardActions = <Link className="" to="/login">login ?</Link>;
     } else {
       ethInput = null ;
@@ -63,12 +76,15 @@ class Auth extends Component {
               <div className="card-content">
                 <h1 className="card-title">{authType}</h1>
                     <div className="input-field">
-                      <input id="email" type="email" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="validate"/>
-                      <label htmlFor="email">Email</label>
+                      <input id="username" type="text" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="validate"/>
+                      <label htmlFor="username">USERNAME</label>
                     </div>
                     <div className="input-field">
                       <input id="password" type="password" value={password} name="password" onChange={this.handleChange} className="validate"/>
-                      <label htmlFor="password">Password</label>
+                      <label htmlFor="password">PASSWORD</label>
+                    </div>
+                    <div className="input-field">
+                      { emailLabel } { emailInput } 
                     </div>
                     <div className="input-field">
                       { ethLabel } { ethInput }
