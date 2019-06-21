@@ -68,19 +68,23 @@ class Polls extends Component {
     return (
       <Fragment>
         {auth.isAuthenticated && (
+          <div className="container">
             <div className="row">
             <div className="section"></div>
-              <button className="btn-small buttons_center col s1 m1 l1 offset-s2 offset-m2 offset-l2 z-depth-3" onClick={getPolls}>
+              <button className="btn col s2 m2 l2 offset-s2 offset-m2 offset-l2 z-depth-3" onClick={getPolls}>
                 All polls
               </button>
-              <button className="btn-small buttons_center col s1 m1 l1 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getUserPolls}>
+              <button className="btn col s2 m2 l2 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getUserPolls}>
                 My polls
               </button>
-              <button className="btn-small buttons_center col s1 m1 l1 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getSlicedPolls}>
+              <button className="btn col s2 m2 l2 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getSlicedPolls}>
                 Last Polls
               </button>
-              
-              <Link className="btn-large buttons_center col s1 m1 l1 offset-s1 offset-m1 offset-l1 z-depth-3" to="/poll/new">New</Link>
+            </div>
+              <div className="section"></div>
+              <div className="row">
+                <Link className="btn-large col s4 m4 l4 offset-s4 offset-m4 offset-l4 z-depth-3" to="/poll/new">New Poll</Link>
+              </div>
             </div>
         )}
         <br></br>
@@ -101,13 +105,14 @@ class Polls extends Component {
                             </table>
                 </div>
               )}
-        {!auth.isAuthenticated && (
-            <div className="container">
-                <h4>You're not connected please register or login to use this app </h4>
-                <p>TODO : homepage for not connected or new users </p>
-            </div>
-        )}
+              {!auth.isAuthenticated && (
+                <ul className="container row">
+                    <li><Link className="btn-large teal col s2 m2 l2 darken-2 z-depth-5" to="/register">Register</Link></li>
+                    <li><Link className="btn-large teal col s2 m2 l2 offset-s1 offset-m1 offset-l1 darken-2 z-depth-5" to="/login">Login</Link></li>
+                </ul>
+              )}
       </Fragment>
+      
     );
   }
 }

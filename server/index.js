@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 
 
 // my own middl
-const db = require('./models');
+//const db = require('./models');
 const handle = require('./handlers/');
 const routes = require('./routes/');
 

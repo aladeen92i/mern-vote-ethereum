@@ -7,4 +7,5 @@ mongoose.connect('mongodb://localhost:27017/vote'); // ma database
 
 module.exports.User = require('./user'); // export des methodes liées aux models
 module.exports.Poll = require('./poll');
+module.exports.Token = require('./token');
 
