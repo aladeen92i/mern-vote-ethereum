@@ -2,30 +2,28 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPolls, getUserPolls, getSlicedPolls } from '../store/actions';
+// Import React Table
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+
 
 class Polls extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+    sorted: [],
+    page: 0,
+    pageSize: 10,
+    expanded: {},
+    resized: [],
+    filtered: []};
     this.handleSelect = this.handleSelect.bind(this);
   }
+
   componentDidMount() {
     const { getSlicedPolls } = this.props;
     getSlicedPolls();
   }
-
-  // componentWillMount() {
-  //   const { getSlicedPolls } = this.props;
-  //   getSlicedPolls();
-  //}
-  // componentWillUpdate() {
-  //   const { getSlicedPolls } = this.props;
-  //   setTimeout(
-  //     function() {
-  //         getSlicedPolls();
-  //     },
-  //     2000
-  //   );
-  // }
 
   handleSelect(id) {
     const { history } = this.props;
@@ -34,25 +32,9 @@ class Polls extends Component {
 
   render() {  
     const { getPolls, getUserPolls, auth, getSlicedPolls } = this.props;
-    // card style for displaying polls, switching to collection for homepage
-    // const cardsPolls = this.props.polls.map(poll => (
-    //   <Fragment key={poll._id}>
-    //   <div className="section">
-    //   <div className="row">
-    //     <div className="col s12 offset-s1">
-    //       <div className="card grey lighten-1">
-    //         <div className="card-content">
-    //           <span className="card-title">{poll.question}</span>
-    //           <a><li className="card-content" onClick={() => this.handleSelect(poll._id)} >Click on me to start voting !</li></a>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   </div>
-    //   </Fragment>
-    // ));
 
     const polls = this.props.polls.map((poll, i=0) => (
+
       <Fragment key={poll._id}>
         <tr className="">
           <td>{poll.question}</td>
@@ -64,27 +46,68 @@ class Polls extends Component {
         </tr>
       </Fragment>
     ));
-
+    console.log();
     return (
+
       <Fragment>
+        
         {auth.isAuthenticated && (
           <div className="container">
-            <div className="row">
-            <div className="section"></div>
-              <button className="btn col s2 m2 l2 offset-s2 offset-m2 offset-l2 z-depth-3" onClick={getPolls}>
-                All polls
-              </button>
-              <button className="btn col s2 m2 l2 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getUserPolls}>
-                My polls
-              </button>
-              <button className="btn col s2 m2 l2 offset-s1 offset-m1 offset-l1 z-depth-3" onClick={getSlicedPolls}>
-                Last Polls
-              </button>
-            </div>
-              <div className="section"></div>
+
+          <ReactTable
+            data={this.props.polls}
+            columns={[
+              {
+                Header: "Poll App",
+                columns: [
+                  {
+                    Header: "User",
+                    accessor: "user.username"
+                  },
+                  {
+                    Header: "Question",
+                    accessor: "question"
+                  },
+                  {
+                    Header: "Voters",
+                    id: "voters",
+                    accessor: d => d.voters
+                  }
+                ]
+              }
+            ]}
+            filterable
+            maxWidth = '160px '
+            defaultPageSize={10}
+            className="-striped -highlight"
+            // Controlled props
+            sorted={this.state.sorted}
+            page={this.state.page}
+            pageSize={this.state.pageSize}
+            expanded={this.state.expanded}
+            resized={this.state.resized}
+            filtered={this.state.filtered}
+            // Callbacks
+            onSortedChange={sorted => this.setState({ sorted })}
+            onPageChange={page => this.setState({ page })}
+            onPageSizeChange={(pageSize, page) => this.setState({ page, pageSize })}
+            onExpandedChange={expanded => this.setState({ expanded })}
+            onResizedChange={resized => this.setState({ resized })}
+            onFilteredChange={filtered => this.setState({ filtered })}
+          />
+          
+          <div className="section"></div>
               <div className="row">
-                <Link className="btn-large col s4 m4 l4 offset-s4 offset-m4 offset-l4 z-depth-3" to="/poll/new">New Poll</Link>
+                <Link className="btn-large col s2 m2 l2 offset-s2 offset-m2 offset-l3 z-depth-3" to="/poll/new">New Poll</Link>
+                <div className="dropdown">
+                  <button onclick="myFunction()" className="dropbtn">Dropdown</button>
+                  <div id="myDropdown" className="dropdown-content">
+                    <Link className="btn-large col s2 m2 l2 offset-s2 offset-m2 offset-l3 z-depth-3" to="/poll/new">New Poll</Link>
+                    <Link className="btn-large col s2 m2 l2 offset-s2 offset-m2 offset-l3 z-depth-3" to="/poll/new">New Poll</Link>
+                  </div>
+                </div>
               </div>
+              <div className="section"></div>
             </div>
         )}
         <br></br>

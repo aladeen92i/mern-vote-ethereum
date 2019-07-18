@@ -15,8 +15,7 @@ const RouteViews = ({ auth, getCurrentPoll }) =>
     <Switch>
         <Route exact path="/" render = { props => <Homepage {...props}/> } />
         <Route exact path="/login" render = { () => <AuthPage authType="login" isAuthenticated={auth.isAuthenticated}/> } />
-        <Route exact path="/poll/new" render={ () => <CreatePollPage isAuthenticated={auth.isAuthenticated} /> }
-        />
+        <Route exact path="/poll/new" render={ () => <CreatePollPage isAuthenticated={auth.isAuthenticated} /> }/>
         <Route exact path="/register" render = { () => <AuthPage authType="register" isAuthenticated={auth.isAuthenticated}/> } />
         <Route exact path='/polls/:id' render={ props => <PollPage getPoll={id => getCurrentPoll(id)} {...props} /> } />
         <Route exact path="/test" render = { () => <TestPage/>}/>

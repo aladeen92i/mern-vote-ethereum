@@ -5,7 +5,7 @@ import ErrorMessage from '../components/ErrorMessage';
 
 const Homepage = props => <div>
     <Polls {...props} />
-    <ErrorMessage />
+    {<ErrorMessage />}
 </div>
 
 export default Homepage;

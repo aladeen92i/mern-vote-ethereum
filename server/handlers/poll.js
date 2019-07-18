@@ -45,16 +45,16 @@ exports.createPoll = async (req, res, next) => {
             }
         }
         const { id } = req.decoded;
-        // console.log("id du user :", id);
+        console.log("id du user :", id);
         const user = await db.User.findById(id);
         const { question, options, voters } = req.body;
-        // console.log("debut du déploiement de contrat + poll sur mongo db, args :", question, options, voters);
+        console.log("debut du déploiement de contrat + poll sur mongo db, args :", question, options, voters);
         let listOpt = options.map(option => ({ option, votes: 0 }));
 	    console.log(listOpt);
         let optTab = [];
         for(let i = 0; i < listOpt.length; i++){
             optTab[i] = web3.fromAscii(listOpt[i].option);
-            //console.log(`opt tab de ${i}  : ` + web3.padRight(optTab[i], 20, '0'));
+            console.log(`opt tab de ${i}  : ` + web3.padRight(optTab[i], 20, '0'));
         }
 
         let currentAccount = user.ethAddress;

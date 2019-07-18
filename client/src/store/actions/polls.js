@@ -25,7 +25,7 @@ export const getPolls = () => {
         }
     }
 }
-
+// more like get last polls but whatever >.<
 export const getSlicedPolls = () => {
     return async dispatch => {
         try {
@@ -40,6 +40,17 @@ export const getSlicedPolls = () => {
         }
     }
 }
+
+// export const sortPolls = () => { // TODO or to remove
+//     return async dispatch => {
+//         try {
+//             const polls = await api.call('get', 'polls');
+//         }catch(err){
+//             const error = err.response.data;
+//             dispatch(addError(error.message));
+//         }
+//     }
+// }
 
 export const getUserPolls = () => {
     return async dispatch => {

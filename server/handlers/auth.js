@@ -1,4 +1,4 @@
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const db = require('../models');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
@@ -45,16 +45,17 @@ exports.register = async (req, res, next) => {
                             throw new Error(err.message)
                           }
                       });
-                      res.status(201).json({id, username});
                   }catch(err){
                     next(err);
                   }
                 });
+                const jwToken = jwt.sign({id, username}, process.env.SECRET);
+                res.status(201).json({id, username, jwToken});
             }catch(err){
               next(err);
             }
           });
-          //const jwToken = jwt.sign({id, username}, process.env.SECRET);
+          
           //end of if(!alreadyExist)
         }else{
           throw new Error('email is already taken');
@@ -78,7 +79,7 @@ exports.login = async (req, res, next) => {
     const valid = await user.comparePassword(req.body.password);
     
 
-    if (valid && user.isVerified) {
+    if (valid) {
       const token = jwt.sign({ id, username }, process.env.SECRET);
       return res.status(200).json({
           id,
