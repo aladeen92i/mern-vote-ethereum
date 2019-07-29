@@ -17,9 +17,11 @@
     "react-scripts": "2.1.5",
     "react-table": "^6.10.0",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "typescript": "^3.5.3"
   },
   "scripts": {
+    "serve": "serve -l 5000 -s ./build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
