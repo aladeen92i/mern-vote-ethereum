@@ -100,7 +100,7 @@ class Polls extends Component {
               <div className="row">
                 <Link className="btn-large col s2 m2 l2 offset-s2 offset-m2 offset-l3 z-depth-3" to="/poll/new">New Poll</Link>
                 <div className="dropdown">
-                  <button onclick="myFunction()" className="dropbtn">Dropdown</button>
+                  <button onClick="myFunction()" className="dropbtn">Dropdown</button>
                   <div id="myDropdown" className="dropdown-content">
                     <Link className="btn-large col s2 m2 l2 offset-s2 offset-m2 offset-l3 z-depth-3" to="/poll/new">New Poll</Link>
                     <Link className="btn-large col s2 m2 l2 offset-s2 offset-m2 offset-l3 z-depth-3" to="/poll/new">New Poll</Link>
