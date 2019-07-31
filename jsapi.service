@@ -1,0 +1,21 @@
+[Unit]
+Description=Node.js REST API Server
+#Requires=mongodb.service
+
+[Service]
+Type=forking
+ExecStart=/root/.nvm/versions/node/v8.10.0/bin/node /home/mern-vote-ethereum/server/index.js
+# Required on some systems
+#RootDirectory=/mern-vote-ethereum/server
+WorkingDirectory=/home/mern-vote-ethereum/server
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+Environment=PATH=/root/.nvm/versions/node/v8.10.0/bin
+Environment=NODE_ENV=PORT=4000
+User=root
+[Install]
+WantedBy=multi-user.target
