@@ -38,14 +38,14 @@ class NavBar extends React.Component {
     const { auth, logout } = this.props;
     return (
       <Navbar>
-        <ul id="nav-mobile" className="left text-center">
+        <ul id="nav-mobile" className="">
           <li>BLOCKCHAIN VOTING</li>
           <li><Link className="btn" to="/"><i className="material-icons">home</i>                                                      </Link></li>
         </ul>
-          <ul id="nav-mobile" className="right">
+          <ul id="nav-mobile" className="">
             {auth.isAuthenticated && (
               <Fragment>
-                  <li><NavItem><Button className="teal darken-2 z-depth-5 right" onClick={logout}>Logout</Button></NavItem></li>
+                  <li><NavItem><Button className="teal darken-2 z-depth-5" onClick={logout}>Logout</Button></NavItem></li>
               </Fragment>
             )}
               {!auth.isAuthenticated && (
