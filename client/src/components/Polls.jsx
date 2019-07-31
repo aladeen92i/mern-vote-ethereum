@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPolls, getUserPolls, getSlicedPolls } from '../store/actions';
+import { Table, Button } from 'reactstrap';
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -106,7 +107,7 @@ class Polls extends Component {
         <br></br>
               {auth.isAuthenticated && (
                 <div className="container z-depth-4">
-                            <table className="responsive-table centered z-depth-1">
+                            <Table className="responsive-table centered z-depth-1">
                               <thead>
                                 <tr>
                                   <th> Name </th>
@@ -118,7 +119,7 @@ class Polls extends Component {
                               </thead>
                               <tbody>{polls}</tbody>
                               
-                            </table>
+                            </Table>
                 </div>
               )}
               {!auth.isAuthenticated && (
