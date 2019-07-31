@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host = 'http://212.47.247.38:4000/api';
+const host = 'http://localhost:4000/api';
 
 export const setToken = token => {
   if (token) {

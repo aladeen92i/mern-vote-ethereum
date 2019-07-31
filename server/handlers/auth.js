@@ -8,7 +8,7 @@ const crypto = require('crypto');
 
 exports.register = async (req, res, next) => {
     try {
-        const alreadyExist = await db.User.findOne({email: req.body.email});
+        const alreadyExist = await db.User.findOne({email: req.body.username});
         console.log("Voici l'utilisateur deja inscrit possedant cet email" + alreadyExist);
 
         if(alreadyExist == null){

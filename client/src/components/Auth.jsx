@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authUser, logout } from '../store/actions';
+import { Card, Button, CardTitle, CardText, Container, Input, Label, Jumbotron, Row, Col, Form  } from 'reactstrap';
+
 
 class Auth extends Component {
   constructor(props) {
@@ -9,7 +11,6 @@ class Auth extends Component {
     this.state = {
       username: '',
       password: '',
-      email: '',
       ethAddress: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -31,36 +32,24 @@ class Auth extends Component {
 
 
   render() {
-    const { username, password, email, ethAddress } = this.state;
+    const { username, password, ethAddress } = this.state;
     const { authType } = this.props;
     let ethInput;
     let ethLabel;
     let cardActions;
-    let emailInput, emailLabel;
 
     if (authType === 'register') {
-      ethInput = <input
+      ethInput = <Input
                     type="text"
                     value={ethAddress}
                     name="ethAddress"
                     onChange={this.handleChange}
                     autoComplete="off"
-                    className="form-input validate"
+                    className="white-text validate"
                   />;
-      ethLabel= <label className="form-label" htmlFor="ethAddress">
+      ethLabel= <Label className="form-label" htmlFor="ethAddress">
                     ethAddress {' '}
-                </label>;
-      emailInput = <input
-                    type="text"
-                    value={email}
-                    name="email"
-                    onChange={this.handleChange}
-                    autoComplete="off"
-                    className="form-input validate"
-                  />;
-      emailLabel= <label className="form-label" htmlFor="email">
-                      email {' '}
-                  </label>;
+                </Label>;
       cardActions = <Link className="" to="/login">login ?</Link>;
     } else {
       ethInput = null ;
@@ -68,40 +57,37 @@ class Auth extends Component {
     }
     return (
         
-        <div className="row">
-        <br></br><br></br><br></br><br></br>
-        <form className="col s8 m6 l4 offset-s2 offset-m4 offset-l4" onSubmit={this.handleSubmit}>
-          
-            <div className="card blue-grey">
-              <div className="card-content">
-                <h1 className="card-title">{authType}</h1>
-                    <div className="input-field">
-                      <input id="username" type="text" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="validate"/>
-                      <label htmlFor="username">USERNAME</label>
-                    </div>
-                    <div className="input-field">
-                      <input id="password" type="password" value={password} name="password" onChange={this.handleChange} className="validate"/>
-                      <label htmlFor="password">PASSWORD</label>
-                    </div>
-                    <div className="input-field">
-                      { emailLabel } { emailInput } 
-                    </div>
-                    <div className="input-field">
-                      { ethLabel } { ethInput }
-                    </div>
-                    <div className="buttons_center">
-                      <button className="button" type="submit">
+          <Container>
+            <div className="section"></div>
+            <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+              <CardTitle>{authType}</CardTitle>
+              <Form onSubmit={this.handleSubmit}>
+              <Row>
+                <Col sm={{ size: '6', offset: 1 }} md={{ size: '6', offset: 1 }} xl={{ size: '6', offset: 1 }} xs={{ size: '6', offset: 1 }} lg={{ size: '6', offset: 1 }}>
+                      <Input id="username" type="text" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="white-text validate"/>
+                      <Label htmlFor="username">USERNAME</Label>
+                </Col>
+                </Row>
+                <Row>
+                  <Col sm={{ size: '6', offset: 1 }}>
+                      <Input id="password" type="password" value={password} name="password" onChange={this.handleChange} className=" white-text validate"/>
+                      <Label htmlFor="password">PASSWORD</Label>
+                  </Col>
+                </Row>
+
+                <Col sm={{ size: '6', offset: 1 }}>
+                       { ethInput }{ ethLabel }
+                </Col>
+                <Col sm={{ size: '6', offset: 1 }}>
+                      <Button className="button" type="submit">
                         Submit
-                      </button>
-                    </div>
-              </div>
-              <div className="card-action">
+                      </Button>
                 <Link className="" to="/poll/new">Forgot password ?</Link> { cardActions }
-              </div>
-            </div>
-          
-        </form>
-      </div>
+              </Col>
+        </Form>
+        
+        </Card>
+        </Container>
     );
   }
 }

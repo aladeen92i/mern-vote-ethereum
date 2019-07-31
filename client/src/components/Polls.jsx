@@ -54,7 +54,7 @@ class Polls extends Component {
         {auth.isAuthenticated && (
           <div className="container">
 
-          <ReactTable
+          {/* <ReactTable
             data={this.props.polls}
             columns={[
               {
@@ -94,7 +94,7 @@ class Polls extends Component {
             onExpandedChange={expanded => this.setState({ expanded })}
             onResizedChange={resized => this.setState({ resized })}
             onFilteredChange={filtered => this.setState({ filtered })}
-          />
+          /> */}
           
           <div className="section"></div>
               <div className="row">
