@@ -10,6 +10,7 @@ import { store } from '../store/';
 import {setCurrentUser, addError, setToken} from '../store/actions';
 import RouteViews from './RouteViews';
 import NavBar from './NavBar';
+import Footer from './Footer';
 
 
 
@@ -38,6 +39,7 @@ const App = () => (
             <Fragment>
                 <NavBar/>
                 <RouteViews/>
+                <Footer />
             </Fragment>
      </BrowserRouter>
     </Provider>

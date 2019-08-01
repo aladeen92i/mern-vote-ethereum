@@ -37,34 +37,49 @@ class NavBar extends React.Component {
   render() {
     const { auth, logout } = this.props;
     return (
-      <Navbar>
-        <ul id="nav-mobile" className="">
-          <li>BLOCKCHAIN VOTING</li>
-          <li><Link className="btn" to="/"><i className="material-icons">home</i>                                                      </Link></li>
-        </ul>
-          <ul id="nav-mobile" className="">
-            {auth.isAuthenticated && (
-              <Fragment>
-                  <li><NavItem><Button className="teal darken-2 z-depth-5" onClick={logout}>Logout</Button></NavItem></li>
-              </Fragment>
-            )}
+      <div>
+        <Navbar color="light" light expand="sm">
+          <NavbarBrand><Link to="/">Home</Link></NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar pills>
+              {auth.isAuthenticated && (
+                <Fragment>
+                    <NavItem ><Button className="" onClick={logout}>Logout</Button></NavItem>
+                </Fragment>
+              )}
               {!auth.isAuthenticated && (
-                  <Fragment>
-                    <li><Link className="btn teal darken-2 z-depth-5 " to="/register">Register</Link></li>
-                    <li><Link className="btn teal darken-2 z-depth-5" to="/login">Login</Link></li>
-                  </Fragment>
-                )}
-          </ul>  
-  
-           {/* <Fragment>
-            <div className="sidebar teal darken-2 z-depth-5">
-              <ul id="nav-mobile" className="left active">
-                <div className="row"><li><Link  className="btn" to="/"><i className="material-icons">home</i>Home</Link></li></div>
-              </ul>
-            </div>
-          </Fragment> */}
-  
-    </Navbar>
+                <Fragment>
+                <NavItem >
+                <NavLink className=""><Link to="/register">Register</Link></NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink><Link to="/login">Login</Link></NavLink>
+                </NavItem>
+                </Fragment>
+              )}
+              {/* <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Options
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    Option 1
+                  </DropdownItem>
+                  <DropdownItem>
+                    Option 2
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    Reset
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown> */}
+            </Nav>
+          </Collapse>
+        </Navbar>
+        <br></br>
+      </div>
   
     );
   }
@@ -76,3 +91,22 @@ export default connect(
   }),
   {logout},
 )(NavBar);
+
+{/* <Navbar color="dark">
+        <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink to="/" inNavbar><i className="material-icons">BLOCKCHAIN VOTING</i></NavLink>
+        </NavItem>
+            {auth.isAuthenticated && (
+              <Fragment>
+                  <NavItem inNavbar><Button className="" onClick={logout}>Logout</Button></NavItem>
+              </Fragment>
+            )}
+              {!auth.isAuthenticated && (
+                    <NavItem inNavbar>
+                      <NavLink  to="/register">Register</NavLink>
+                      <NavLink  to="/login">Login</NavLink>
+                    </NavItem>
+                )}
+        </Nav>
+    </Navbar> */}

@@ -21,7 +21,8 @@
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "scripts": {
     "serve": "serve -l 5000 -s ./build",
