@@ -35,8 +35,10 @@ export const getSlicedPolls = () => {
             dispatch(setPolls(slicedPolls));
             dispatch(removeError());
         } catch (err) {
-            const error = err.response.data;
-            dispatch(addError(error.message));
+            if(err){
+                const error = err.response.data;
+                dispatch(addError(error.message));
+            }
         }
     }
 }
