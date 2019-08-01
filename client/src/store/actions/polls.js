@@ -26,23 +26,23 @@ export const getPolls = () => {
     }
 }
 // more like get last polls but whatever >.<
-export const getSlicedPolls = () => {
-    return async dispatch => {
-        try {
-            const polls = await api.call('get', 'polls');
-            console.log("ceci est la taille de polls : " + polls.length);
-            const slicedPolls = polls.slice((polls.length - 5),polls.length);
-            dispatch(setPolls(slicedPolls));
-            dispatch(removeError());
-        } catch (err) {
-            if(err != undefined){
-                console.log("Voici l'erreur : ", err);
-                const error = err.response.data;
-                dispatch(addError(error.message));
-            }
-        }
-    }
-}
+// export const getSlicedPolls = () => {
+//     return async dispatch => {
+//         try {
+//             const polls = await api.call('get', 'polls');
+//             console.log("ceci est la taille de polls : " + polls.length);
+//             const slicedPolls = polls.slice((polls.length - 5),polls.length);
+//             dispatch(setPolls(slicedPolls));
+//             dispatch(removeError());
+//         } catch (err) {
+//             if(err != undefined){
+//                 console.log("Voici l'erreur : ", err);
+//                 //const error = err.response.data;
+//                 dispatch(addError(err));
+//             }
+//         }
+//     }
+// }
 
 // export const sortPolls = () => { // TODO or to remove
 //     return async dispatch => {
