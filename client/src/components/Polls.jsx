@@ -47,7 +47,6 @@ class Polls extends Component {
         </tr>
       </Fragment>
     ));
-    console.log();
     return (
 
       <Fragment>
