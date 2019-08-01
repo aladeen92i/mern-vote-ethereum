@@ -39,7 +39,7 @@ class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="sm">
-          <NavbarBrand><Link to="/">Home</Link></NavbarBrand>
+          <NavbarBrand><Button color="secondary"><Link className="white-text" to="/">Home</Link></Button></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar pills>

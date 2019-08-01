@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPolls, getUserPolls} from '../store/actions';
-import { Table, Button, UncontrolledCarousel, Container } from 'reactstrap';
+import { Table, Button, UncontrolledCarousel, Container, Row, Col } from 'reactstrap';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -72,9 +72,14 @@ class Polls extends Component {
               {auth.isAuthenticated && (
                 <Fragment>
                 <div className="section"></div>
-                <div className="row">
-                  <Link className="btn-large col s2 m2 l2 offset-s2 offset-m2 offset-l3 z-depth-3" to="/poll/new">New Poll</Link>
-                </div>
+                <Row>
+                  <Col>
+                    <div className="buttons_center">
+                      <Button color="secondary"><Link to="/poll/new">New Poll</Link></Button>
+                    </div>
+                    <br />
+                  </Col>
+                </Row>
                 <div className="section"></div>
                 <div className="container z-depth-4">
                             <Table className="responsive-table centered z-depth-1">

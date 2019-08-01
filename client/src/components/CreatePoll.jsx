@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { Card, Button, CardTitle, CardText, Container, Input, Label, Jumbotron, Row, Col, Form, FormGroup, FormText  } from 'reactstrap';
 import { createPoll } from '../store/actions';
 
 class CreatePoll extends Component {
@@ -52,9 +52,9 @@ class CreatePoll extends Component {
   render() {
     const options = this.state.options.map((option, i) => (
       <Fragment key={i}>
-        <label className="label-info black-text">option</label>
-        <input
-          className="input-field"
+        <Label>option {i}</Label>
+        <Input
+          className=""
           type="text"
           value={options}
           onChange={e => this.handleAnswer(e, i)}
@@ -65,9 +65,8 @@ class CreatePoll extends Component {
 
     const voters = this.state.voters.map((voter, i) => (
       <Fragment key={i}>
-        <label className="label-info black-text">voter</label>
-        <input
-          className="input-field"
+        <Label>voter {i}</Label>
+        <Input
           type="text"
           value={voters}
           onChange={e => this.handleVoter(e, i)}
@@ -76,45 +75,42 @@ class CreatePoll extends Component {
     ));
 
     return (
-      
-    <div className="row">
-      <form className="form" onSubmit={this.handleSubmit}>
-        <div className="container">
-          <div className="card blue-grey darken-1">
-            <div className="card-content">
-        <label className="form-label black-text" htmlFor="question">
-          question
-        </label>
-        <input
-          className="input-field"
-          type="text"
-          name="question"
-          value={this.state.question}
-          onChange={this.handleChange}
-        />
-        <div className="container">{options}
-        <div className="buttons_center">
-          <button className="button" type="button" onClick={this.addAnswer}>
-            Add options
-          </button>
-          </div>
-          <div className="container">{voters}</div>
-          <div className="buttons_center">
-          <button className="button" type="button" onClick={this.addVoter}>
-            Add Voter
-          </button>
-          </div>
-          <div className="buttons_center">
-          <button className="button" type="submit">
-            Submit
-          </button>
-          </div>
-        </div>
-        </div>
-        </div>
-        </div>
-      </form>
-      </div>
+    <Fragment>
+      <Jumbotron>
+        <Container>
+          <Form onSubmit={this.handleSubmit}>
+            <Label htmlFor="question">
+              question
+            </Label>
+            <Input
+              type="text"
+              name="question"
+              value={this.state.question}
+              onChange={this.handleChange}
+            />
+            <br />
+            {options}
+            <br />
+            <Button className="btnprimary" type="button" onClick={this.addAnswer}>
+              Add options
+            </Button>
+            <br />
+            <br />
+            {voters}
+            <br />
+            <Button className="btn primary" type="button" onClick={this.addVoter}>
+              Add Voter
+            </Button>
+            <br />
+            <div className="buttons_center">
+            <Button className="btn primary" type="submit">
+              Submit
+            </Button>
+            </div>
+          </Form>
+        </Container>
+      </Jumbotron>
+    </Fragment>
     );
   }
 }

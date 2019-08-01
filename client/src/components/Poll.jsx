@@ -4,6 +4,7 @@ import { Pie } from 'react-chartjs-2';
 import { vote, deletePoll } from '../store/actions';
 import { color } from '../services/color';
 import { withRouter } from 'react-router-dom';
+import { Button, Jumbotron, Container, Row, Col } from 'reactstrap';
 
 
 const Poll = ({ poll, vote, deletePoll }) => {
@@ -11,12 +12,12 @@ const Poll = ({ poll, vote, deletePoll }) => {
   const answers =
     poll.options &&
     poll.options.map(option => (
-      <button
+      <Button
         onClick={() => vote(poll._id, { answer: option.option })}
-        className="button"
+        className="btn primary"
         key={option._id}>
         {option.option}
-      </button>
+      </Button>
     ));
 
   const pollData = poll.options && {
@@ -32,16 +33,11 @@ const Poll = ({ poll, vote, deletePoll }) => {
     ],
   };
 
-  const pollDataBis = async () => {
-    // TODO : appel sur l'api pour récupérer les infos du contrat 
-    // au lieu de stocker dans mongo quand l'appel au noeud eth s'est bien passé..
-    // puis les display comme prévu
-  };
-
   return (
-    <div className="row">
-      <div className="container">
-        <div className="col s6 m6">
+    <Jumbotron>
+      <Container>
+        <Row>
+          <Col sm="6" lg="6">
           <div className="card blue-grey darken-1">
             <div className="card-content white-text">
               <span className="card-title">{poll.question}</span>
@@ -54,7 +50,7 @@ const Poll = ({ poll, vote, deletePoll }) => {
             </ul>
           </div>
           </div>
-        </div>
+        </Col>
           <div className="container">
             <div className="col s6 m6">
               <div className="card blue-grey lighten-2">
@@ -66,8 +62,9 @@ const Poll = ({ poll, vote, deletePoll }) => {
               </div>
             </div>
           </div>
-      </div>
-    </div>
+        </Row>
+      </Container>
+    </Jumbotron>
   );
 };
 
