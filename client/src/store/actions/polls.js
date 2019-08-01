@@ -36,6 +36,7 @@ export const getSlicedPolls = () => {
             dispatch(removeError());
         } catch (err) {
             if(err != undefined){
+                console.log("Voici l'erreur : ", err);
                 const error = err.response.data;
                 dispatch(addError(error.message));
             }
