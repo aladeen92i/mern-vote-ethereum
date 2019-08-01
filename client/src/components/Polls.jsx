@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPolls, getUserPolls, getSlicedPolls } from '../store/actions';
+import { getPolls, getUserPolls} from '../store/actions';
 import { Table, Button } from 'reactstrap';
 // Import React Table
 import ReactTable from "react-table";
@@ -22,8 +22,6 @@ class Polls extends Component {
   }
 
   componentDidMount() {
-    const { getSlicedPolls } = this.props;
-    getSlicedPolls();
   }
 
   handleSelect(id) {
@@ -32,7 +30,7 @@ class Polls extends Component {
   }
 
   render() {  
-    const { getPolls, getUserPolls, auth, getSlicedPolls } = this.props;
+    const { getPolls, getUserPolls, auth} = this.props;
 
     const polls = this.props.polls.map((poll, i=0) => (
 
@@ -137,5 +135,5 @@ export default connect(store => ({
     auth: store.auth,
     polls: store.polls,
   }),
-  { getPolls, getUserPolls, getSlicedPolls },
+  { getPolls, getUserPolls},
 )(Polls);
