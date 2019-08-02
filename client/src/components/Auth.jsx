@@ -50,39 +50,50 @@ class Auth extends Component {
       ethLabel= <Label htmlFor="ethAddress">
                     ETHADDRESS
                 </Label>;
-      cardActions = <Link className="" to="/login">login ?</Link>;
+      cardActions = <Link className="text-dark" to="/login">login ?</Link>;
     } else {
       ethInput = null ;
-      cardActions = <Link className="" to="/register">register ?</Link>;
+      cardActions = <Link className="text-dark" to="/register">register ?</Link>;
     }
     return (
       <Fragment>
-        <Jumbotron fluid>
-          <Container border="true" fluid>
-            <div className="section"></div>
-              <Form onSubmit={this.handleSubmit}>
-              <h1>{authType}</h1>
+        <div className="section"></div>
+        <Jumbotron fluid className="bg-secondary">
+          <Container className="rounded shadow p-3 mb-5" style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded" light>
+              <Form onSubmit={this.handleSubmit} className="card-content">
               <Row>
                 <Col sm={{ size: '6', offset: 1 }} md={{ size: '6', offset: 1 }} xl={{ size: '6', offset: 1 }} xs={{ size: '6', offset: 1 }} lg={{ size: '6', offset: 1 }}>
-                      <Input id="username" type="text" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="validate"/>
-                      <Label htmlFor="username">USERNAME</Label>
+                      <FormGroup>
+                        <h1>{authType}</h1>
+                        <Input id="username" type="text" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="validate form-control"/>
+                        <Label htmlFor="username">USERNAME</Label>
+                      </FormGroup>
                 </Col>
                 </Row>
                 <Row>
                   <Col sm={{ size: '6', offset: 1 }} md={{ size: '6', offset: 1 }} xl={{ size: '6', offset: 1 }} xs={{ size: '6', offset: 1 }} lg={{ size: '6', offset: 1 }}>
-                      <Input id="password" type="password" value={password} name="password" onChange={this.handleChange} className=" white-text validate"/>
-                      <Label htmlFor="password">PASSWORD</Label>
+                      <FormGroup>
+                        <Input id="password" type="password" value={password} name="password" onChange={this.handleChange} className="white-text validate"/>
+                        <Label htmlFor="password">PASSWORD</Label>
+                      </FormGroup>
                   </Col>
                 </Row>
-
-                <Col sm={{ size: '6', offset: 1 }} md={{ size: '6', offset: 1 }} xl={{ size: '6'}} xs={{ size: '6'}} lg={{ size: '6'}}>
-                       { ethInput }{ ethLabel }
+                <Col sm={{ size: '6', offset: 1 }} md={{ size: '6', offset: 1 }} xl={{ size: '6', offset: 1 }} xs={{ size: '6', offset: 1 }} lg={{ size: '6'}}>
+                  <FormGroup>{ethInput}{ethLabel}</FormGroup>
                 </Col>
                 <Col sm={{ size: '6', offset: 1 }}>
-                      <Button className="button" type="submit">
+                <FormGroup>
+                      <button className="btn btn-primary" type="submit">
                         Submit
-                      </Button>
-                <Link className="" to="/poll/new">Forgot password ?</Link> { cardActions }
+                      </button>
+                  </FormGroup>
+                      <div className="section"></div>
+                  <FormGroup>
+                      <div className="card-actions">
+                        <Link className="text-dark" to="/">Forgot password ?</Link> { cardActions }
+                      </div>
+                  </FormGroup>
+                  
               </Col>
               </Form>
           </Container>

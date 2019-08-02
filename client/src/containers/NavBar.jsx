@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../store/actions';
 import {
@@ -38,23 +38,23 @@ class NavBar extends React.Component {
     const { auth, logout } = this.props;
     return (
       <div>
-        <Navbar color="light" light expand="sm">
-          <NavbarBrand><Button color="secondary"><Link className="white-text" to="/">Home</Link></Button></NavbarBrand>
+        <Navbar  style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded" light expand="sm">
+        <NavbarBrand><Button onClick={() => {this.props.history.push('/')}}>Home</Button></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar pills>
+            <Nav className="ml-auto" navbar>
               {auth.isAuthenticated && (
                 <Fragment>
-                    <NavItem ><Button className="" onClick={logout}>Logout</Button></NavItem>
+                    <NavItem ><Button onClick={logout}>Logout</Button></NavItem>
                 </Fragment>
               )}
               {!auth.isAuthenticated && (
                 <Fragment>
                 <NavItem >
-                <NavLink className=""><Link to="/register">Register</Link></NavLink>
+                <NavLink><Button onClick={() => {this.props.history.push('/register')}}>Register</Button></NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink><Link to="/login">Login</Link></NavLink>
+                <NavLink><Button onClick={() => {this.props.history.push('/login')}}>Login</Button></NavLink>
                 </NavItem>
                 </Fragment>
               )}
@@ -85,12 +85,12 @@ class NavBar extends React.Component {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   store => ({
     auth: store.auth,
   }),
   {logout},
-)(NavBar);
+)(NavBar));
 
 {/* <Navbar color="dark">
         <Nav className="ml-auto" navbar>

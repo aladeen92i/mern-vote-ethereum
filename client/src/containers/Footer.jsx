@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../store/actions';
-import {Jumbotron, Container, Row, Col } from 'reactstrap';
+import {Jumbotron, Container, Row, Col, NavLink, Navbar, Button } from 'reactstrap';
 
 
 
@@ -25,7 +25,7 @@ class Footer extends React.Component {
     return (
     <Fragment>
     <br/>
-      <Jumbotron fluid>
+      <Jumbotron fluid  style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded" light nav navbar>
         <Container>
           <Row >
             <Col sm="12" lg="6" >
@@ -34,18 +34,15 @@ class Footer extends React.Component {
             </Col>
             <Col lg="4" sm="12">
               <h5 className="display-5">Cool Links about us</h5>
-              <ul>
-                <li><a className="grey-text text-lighten-3" href="https://www.gfi.world/fr-en/">Gfi</a></li>
-                <li><a className="grey-text text-lighten-3" href="https://github.com/zeley93">github</a></li>
-              </ul>
+
+                <NavLink href="https://www.gfi.world/fr-en/"><Button color="secondary">Gfi</Button></NavLink>
+                <NavLink href="https://github.com/zeley93"><Button color="secondary">Github</Button></NavLink>
             </Col>
           </Row>
         </Container>
-        <div className="footer-copyright">
-          <div className="container">
+          <Container>
           © 2019 Copyright - GFI
-          </div>
-        </div>
+          </Container>
         </Jumbotron>
       </Fragment> 
     );

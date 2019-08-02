@@ -14,7 +14,6 @@ const Poll = ({ poll, vote, deletePoll }) => {
     poll.options.map(option => (
       <Button
         onClick={() => vote(poll._id, { answer: option.option })}
-        className="btn primary"
         key={option._id}>
         {option.option}
       </Button>
