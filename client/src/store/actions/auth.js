@@ -14,7 +14,7 @@ export const setToken = token => {
 export const logout = () => {
     return dispatch => {
         localStorage.clear();
-        api.setToken(null);
+        setToken(null);
         dispatch(setCurrentUser({}));
         dispatch(removeError());
     }
@@ -24,6 +24,7 @@ export const authUser = (path, data) => {
     return async dispatch => {
         try {
             const {token, ...user} = await api.call('post', `auth/${path}`, data);
+            console.log("Voici le token retourné par l'API");
             localStorage.setItem('jwtToken', token);
             api.setToken(token);
             dispatch(setCurrentUser(user));
