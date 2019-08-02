@@ -78,7 +78,6 @@ class NavBar extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <br></br>
       </div>
   
     );

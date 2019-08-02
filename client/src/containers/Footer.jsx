@@ -24,8 +24,7 @@ class Footer extends React.Component {
   render() {
     return (
     <Fragment>
-    <br/>
-      <Jumbotron fluid  style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded" light nav navbar>
+      <Jumbotron fluid  style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded">
         <Container>
           <Row >
             <Col sm="12" lg="6" >
