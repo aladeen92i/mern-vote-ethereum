@@ -8,12 +8,12 @@ const crypto = require('crypto');
 
 exports.register = async (req, res, next) => {
     try {
-        const alreadyExist = await db.User.findOne({email: req.body.username});
+        const alreadyExist = await db.User.findOne({username: req.body.username});
         console.log("Voici l'utilisateur deja inscrit possedant cet email" + alreadyExist);
 
         if(alreadyExist == null){
           const user = await db.User.create(req.body);
-          const  { id, username, email } = user;
+          const  { id, username} = user;
           await user.save(async () => {
             try{
                 let registrationToken = await db.Token.create({ _userId: user._id, token: crypto.randomBytes(16).toString('hex')});
@@ -34,7 +34,7 @@ exports.register = async (req, res, next) => {
                       // Message object
                       let message = {
                           from: process.env.GMAIL_USER,
-                          to: email,
+                          to: username,
                           subject: 'Account Verification Token',
                           text: '',
                           html: 'Hello,\n\n' + 'Please verify your account by clicking the link: \n<a>http:\/\/' + 'api/' +req.headers.host + '\/confirmation\/' + registrationToken.token + '</a>' + '.\n'
@@ -43,14 +43,16 @@ exports.register = async (req, res, next) => {
                           if (err) {
                             console.log('Error occurred. ' + err.message);
                             throw new Error(err.message)
+                          }else{
+                            const jwToken = jwt.sign({id, username}, process.env.SECRET);
+                            console.log("Voici le token envoyé par l'api : ", jwToken);
+                            res.status(201).json({id, username, jwToken});
                           }
                       });
                   }catch(err){
                     next(err);
                   }
                 });
-                const jwToken = jwt.sign({id, username}, process.env.SECRET);
-                res.status(201).json({id, username, jwToken});
             }catch(err){
               next(err);
             }
@@ -103,7 +105,7 @@ exports.confirmation = async (req, res, next) => {
 
       
       // If we found a token, find a matching user
-      User.findOne({ _id: token._userId, email: req.body.email }, function (err, user) {
+      User.findOne({ _id: token._userId, username: req.body.username }, function (err, user) {
           if (!user) throw new Error('Coudnt find a user for this token');
           if (user.isVerified) throw new Error('Email has already been verified' + err.message);
 

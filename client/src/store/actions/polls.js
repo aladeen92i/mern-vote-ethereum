@@ -25,6 +25,7 @@ export const getPolls = () => {
         }
     }
 }
+
 // more like get last polls but whatever >.<
 // export const getSlicedPolls = () => {
 //     return async dispatch => {
