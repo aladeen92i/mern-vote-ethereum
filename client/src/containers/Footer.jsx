@@ -24,25 +24,19 @@ class Footer extends React.Component {
   render() {
     return (
     <Fragment>
-      <Jumbotron fluid  style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded">
-        <Container>
-          <Row >
-            <Col sm="12" lg="6" >
-              <h5 className="display-5">Voting Blockchain App by GFI</h5>
-              <p className="lead">Ask your question now by creating a poll :)</p>
-            </Col>
-            <Col lg="4" sm="12">
-              <h5 className="display-5">Cool Links about us</h5>
-
-                <NavLink href="https://www.gfi.world/fr-en/"><Button color="secondary">Gfi</Button></NavLink>
-                <NavLink href="https://github.com/zeley93"><Button color="secondary">Github</Button></NavLink>
-            </Col>
-          </Row>
-        </Container>
-          <Container>
-          © 2019 Copyright - GFI
-          </Container>
-        </Jumbotron>
+            <Container className="footer" style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded" fluid>
+              <Row>
+                <Col sm="6" lg="6">
+                  <p className="display-5">Voting Blockchain App by GFI - © 2019 Copyright</p>
+                </Col>
+                <Col sm="2" lg="2">
+                  <NavLink href="https://github.com/zeley93"><Button color="secondary">Github</Button></NavLink>
+                </Col>
+                <Col sm="2" lg="2">
+                  <NavLink href="https://www.gfi.world/fr-en/"><Button color="secondary">Gfi</Button></NavLink>
+                </Col>
+              </Row>
+            </Container>
       </Fragment> 
     );
   }

@@ -45,7 +45,7 @@ class Auth extends Component {
                     name="ethAddress"
                     onChange={this.handleChange}
                     autoComplete="off"
-                    className="validate"
+                    className="form-control validate"
                   />;
       ethLabel= <Label htmlFor="ethAddress">
                     ETHADDRESS
@@ -58,9 +58,9 @@ class Auth extends Component {
     return (
       <Fragment>
         <div className="section"></div>
-        <Jumbotron fluid className="bg-secondary">
-          <Container className="rounded shadow p-3 mb-5" style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded" light>
-              <Form onSubmit={this.handleSubmit} className="card-content">
+        <Jumbotron className="bg-secondary">
+          <Container className="rounded shadow p-3 mb-5" style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded">
+              <Form onSubmit={this.handleSubmit}>
               <Row>
                 <Col sm={{ size: '6', offset: 1 }} md={{ size: '6', offset: 1 }} xl={{ size: '6', offset: 1 }} xs={{ size: '6', offset: 1 }} lg={{ size: '6', offset: 1 }}>
                       <FormGroup>
@@ -68,12 +68,12 @@ class Auth extends Component {
                         <Input id="username" type="text" value={username} name="username" onChange={this.handleChange} autoComplete="off" className="validate form-control"/>
                         <Label htmlFor="username">USERNAME</Label>
                       </FormGroup>
-                </Col>
+                  </Col>
                 </Row>
                 <Row>
                   <Col sm={{ size: '6', offset: 1 }} md={{ size: '6', offset: 1 }} xl={{ size: '6', offset: 1 }} xs={{ size: '6', offset: 1 }} lg={{ size: '6', offset: 1 }}>
                       <FormGroup>
-                        <Input id="password" type="password" value={password} name="password" onChange={this.handleChange} className="white-text validate"/>
+                        <Input id="password" type="password" value={password} name="password" onChange={this.handleChange} className="form-control validate"/>
                         <Label htmlFor="password">PASSWORD</Label>
                       </FormGroup>
                   </Col>

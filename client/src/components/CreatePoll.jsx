@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Card, Button, CardTitle, CardText, Container, Input, Label, Jumbotron, Row, Col, Form, FormGroup, FormText  } from 'reactstrap';
 import { createPoll } from '../store/actions';
+import StepWizard from 'react-step-wizard';
 
 class CreatePoll extends Component {
   constructor(props) {
@@ -54,7 +55,6 @@ class CreatePoll extends Component {
       <Fragment key={i}>
         <Label>option {i}</Label>
         <Input
-          className=""
           type="text"
           value={options}
           onChange={e => this.handleAnswer(e, i)}
@@ -91,21 +91,21 @@ class CreatePoll extends Component {
             <br />
             {options}
             <br />
-            <Button className="btnprimary" type="button" onClick={this.addAnswer}>
+            <Button className="btn btn-primary" type="button" onClick={this.addAnswer}>
               Add options
             </Button>
             <br />
             <br />
             {voters}
             <br />
-            <Button className="btn primary" type="button" onClick={this.addVoter}>
+            <Button className="btn btn-primary" type="button" onClick={this.addVoter}>
               Add Voter
             </Button>
             <br />
             <div className="buttons_center">
-            <Button className="btn primary" type="submit">
+            <button className="btn btn-primary" type="submit">
               Submit
-            </Button>
+            </button>
             </div>
           </Form>
         </Container>
