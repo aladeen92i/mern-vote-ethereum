@@ -1,5 +1,5 @@
 const db = require('../models');
-const endPointNetwork = "http://40.118.96.236:4563/";
+const endPointNetwork = "http://13.95.171.164:4563/";
 let Web3 = require('web3');
 
 const interfaceAbi = require('../contracts/Ballot.json');

@@ -16,9 +16,6 @@ import {
   DropdownItem,
   Button } from 'reactstrap';
 
-// const NavBarComposant = ({ auth, logout }) => (
-
-
 
 class NavBar extends React.Component {
   constructor(props) {
