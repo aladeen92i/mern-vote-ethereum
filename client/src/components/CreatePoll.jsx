@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Card, Button, CardTitle, CardText, Container, Input, Label, Jumbotron, Row, Col, Form, FormGroup, FormText  } from 'reactstrap';
+import { Progress, Button, Container, Input, Label, Jumbotron, Row, Col, Form, FormGroup, FormText } from 'reactstrap';
 import { createPoll } from '../store/actions';
 
 
@@ -10,55 +10,80 @@ function StepOne(props){
       return null
     }
     const options = props.options.map((option, i) => (
-      <Fragment key={i}>
-        <Label>option {i}</Label>
-        <Input
-          type="text"
-          value={option.option}
-          onChange={e => props.handleAnswer(e, i)}
-        />
-      </Fragment>
+        <FormGroup key={i}>
+        <Col sm={10} lg={10}>
+        <legend className="col-form-label">Option N {i}</legend>
+          <Input
+            type="text"
+            value={option.option}
+            onChange={e => props.handleAnswer(e, i)}
+          />
+        </Col>
+        </FormGroup>
     ));
     return (
-      <Fragment>
-      <FormGroup>
-        <Label htmlFor="question">
-              question
-            </Label>
+    <Fragment>
+      <FormGroup tag="fieldset" row>
+        <Col sm={10} lg={10}>
+        <Progress animated color="info" value={25}>Poll Creation 25%</Progress>
+        <legend className="col-form-label">Poll Question</legend>
             <Input
               type="text"
               name="question"
               value={props.question}
               onChange={props.handleChange}
             />
+        </Col>
             <br />
             {options}
             <br />
-            <Button className="btn btn-primary" type="button" onClick={props.addAnswer}>
+            <Button className="offset-1" type="button" onClick={props.addAnswer}>
               Add options
             </Button>
       </FormGroup>
-      <FormGroup>
-        <FormGroup>
-          <Label for="exampleDate">Date</Label>
-          <Input
-            type="date"
-            name="date"
-            id="exampleDate"
-            placeholder="date placeholder"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleTime">Time</Label>
-          <Input
-            type="time"
-            name="time"
-            id="exampleTime"
-            placeholder="time placeholder"
-          />
-        </FormGroup>
+      <FormGroup row>
+      <Col sm={10} lg={10}>
+        <Label for="openingDate">Opening</Label>
+        <Input
+          type="date"
+          name="openingDate"
+          id="openingDate"
+          placeholder="Opening Date"
+        />
+      </Col>
       </FormGroup>
-      </Fragment>
+      <FormGroup row>
+      <Col sm={10} lg={10}>
+        <Input
+          type="time"
+          name="openingTime"
+          id="openingTime"
+          placeholder="Time placeholder"
+        />
+      </Col>
+      </FormGroup>
+      <FormGroup row>
+      <Col sm={10} lg={10}>
+        <Label for="openingDate">Closing</Label>
+        <Input
+          type="date"
+          name="closingDate"
+          id="closingDate"
+          placeholder="closing Date"
+        />
+        </Col>
+      </FormGroup>
+      <FormGroup row>
+      <Col sm={10} lg={10}>
+        <Input
+          type="time"
+          name="closingTime"
+          id="closingTime"
+          placeholder="Closing Time"
+        />
+      </Col>
+      </FormGroup>
+    </Fragment>
     )
 }
 
@@ -80,16 +105,16 @@ function StepTwo(props){
 
   return (
     <div>
+    <FormText>
+      <Progress animated color="info" value={75}>Poll Creation 75%%</Progress>
+    </FormText>
     <FormGroup>
       {voters}
-      <br />
-      <Button className="btn btn-primary" type="button" onClick={props.addVoter}>
-            Add Voter
-      </Button>
     </FormGroup>
-    <FormGroup>
-      <button className="btn btn-success buttons_center" onClick={props.handleSubmit}>Submit</button>
-    </FormGroup>
+    <Button className="btn btn-primary" type="button" onClick={props.addVoter}>
+                Add Voter
+    </Button>
+    <br/><br></br>
     </div>
     
   )
@@ -178,7 +203,7 @@ class CreatePoll extends Component {
 
   nextButton(){
     let currentStep = this.state.currentStep;
-    if(currentStep <3){
+    if(currentStep <2){
       return (
         <button 
           className="btn btn-primary float-right" 
@@ -215,8 +240,17 @@ class CreatePoll extends Component {
 
         />
         <br />
-        {this.previousButton()}
-        {this.nextButton()}
+        <FormGroup>
+          {this.previousButton()}
+          {this.nextButton()}
+        </FormGroup>
+        <br></br>
+        <br></br>
+        {this.state.currentStep == 2 && (
+            <div>
+              <button className="btn btn-success btn-block" onClick={this.handleSubmit}>Submit</button>
+            </div>
+        )}
         </Form>
         </Container>
       </Jumbotron>

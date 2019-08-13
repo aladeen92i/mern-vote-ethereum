@@ -20,7 +20,6 @@ import {
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
@@ -35,27 +34,13 @@ class NavBar extends React.Component {
     const { auth, logout } = this.props;
     return (
       <div>
-        <Navbar  style={{backgroundColor: '#008080', border: '5px solid grey', borderRadius: '1px'}} color="faded" light expand="sm">
+        {auth.isAuthenticated && (
+        <Navbar  style={{backgroundColor: '#008080', border: '3px solid grey', borderRadius: '2px'}} color="faded" light expand="sm">
         <NavbarBrand><Button onClick={() => {this.props.history.push('/')}}>Home</Button></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {auth.isAuthenticated && (
-                <Fragment>
-                    <NavItem ><Button onClick={logout}>Logout</Button></NavItem>
-                </Fragment>
-              )}
-              {!auth.isAuthenticated && (
-                <Fragment>
-                <NavItem >
-                <NavLink><Button onClick={() => {this.props.history.push('/register')}}>Register</Button></NavLink>
-                </NavItem>
-                <NavItem>
-                <NavLink><Button onClick={() => {this.props.history.push('/login')}}>Login</Button></NavLink>
-                </NavItem>
-                </Fragment>
-              )}
-              {/* <UncontrolledDropdown nav inNavbar>
+              <UncontrolledDropdown nav inNavbar className="float-right">
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
@@ -71,10 +56,26 @@ class NavBar extends React.Component {
                     Reset
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown> */}
+              </UncontrolledDropdown>
+              {auth.isAuthenticated && (
+                <Fragment>
+                    <NavItem className="float-right"><Button onClick={logout}>Logout</Button></NavItem>
+                </Fragment>
+              )}
+              {!auth.isAuthenticated && (
+              <Fragment>
+                <NavItem >
+                  <NavLink><Button className="float-right" onClick={() => {this.props.history.push('/register')}}>Register</Button></NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink><Button className="float-right" onClick={() => {this.props.history.push('/login')}}>Login</Button></NavLink>
+                </NavItem>
+              </Fragment>
+              )}
             </Nav>
           </Collapse>
         </Navbar>
+        )}
       </div>
   
     );

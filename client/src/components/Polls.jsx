@@ -101,9 +101,11 @@ class Polls extends Component {
               
               {!auth.isAuthenticated && (
                 <Fragment>
-                <Container>
+                {/* <Container>
                 <UncontrolledCarousel items={items} />
-                </Container>
+                </Container> */
+                this.history.push(`/register`)
+                }
                 </Fragment>
               )}
       </div>

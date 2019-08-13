@@ -9,6 +9,7 @@
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
     "materialize-css": "^1.0.0",
+    "mdbreact": "^4.19.0",
     "particles.js": "^2.0.0",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
