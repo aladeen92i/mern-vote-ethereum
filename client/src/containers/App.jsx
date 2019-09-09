@@ -23,6 +23,8 @@ if(localStorage.jwtToken) {
         store.dispatch(setCurrentUser({}));
         store.dispatch(addError(err));
     }
+}else{
+    
 }
 
     

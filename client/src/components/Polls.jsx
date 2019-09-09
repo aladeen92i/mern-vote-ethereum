@@ -5,7 +5,6 @@ import { getPolls, getUserPolls} from '../store/actions';
 import { Table, Button, UncontrolledCarousel, Container, Row, Col } from 'reactstrap';
 
 // Import React Table
-import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 const items = [

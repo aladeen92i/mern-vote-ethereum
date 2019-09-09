@@ -15,6 +15,8 @@ import {
   DropdownMenu,
   DropdownItem,
   Button } from 'reactstrap';
+  import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
+    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBBtn } from "mdbreact";
 
 
 class NavBar extends React.Component {
@@ -35,28 +37,10 @@ class NavBar extends React.Component {
     return (
       <div>
         {auth.isAuthenticated && (
-        <Navbar  style={{backgroundColor: '#008080', border: '3px solid grey', borderRadius: '2px'}} color="faded" light expand="sm">
-        <NavbarBrand><Button onClick={() => {this.props.history.push('/')}}>Home</Button></NavbarBrand>
+        <MDBNavbar  style={{backgroundColor: '#008080', border: '3px solid grey', borderRadius: '2px'}} color="faded" light expand="sm">
+        <MDBNavbarBrand><MDBBtn onClick={() => {this.props.history.push('/')}}>Home</MDBBtn></MDBNavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <UncontrolledDropdown nav inNavbar className="float-right">
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
               {auth.isAuthenticated && (
                 <Fragment>
                     <NavItem className="float-right"><Button onClick={logout}>Logout</Button></NavItem>
@@ -73,8 +57,7 @@ class NavBar extends React.Component {
               </Fragment>
               )}
             </Nav>
-          </Collapse>
-        </Navbar>
+        </MDBNavbar>
         )}
       </div>
   
