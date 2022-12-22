@@ -15,7 +15,7 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
-    "jsonwebtoken": "^8.5.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.0.15",
     "path": "^0.12.7",
     "pm2": "^3.5.0",
